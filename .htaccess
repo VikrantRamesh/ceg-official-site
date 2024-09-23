@@ -1,0 +1,11 @@
+# Enable RewriteEngine
+RewriteEngine On
+
+# Rewrite static file paths to include the build directory
+RewriteRule ^static/(.*)$ /build/static/$1 [L]
+
+
+# Redirect requests to index.php if the file or directory does not exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
