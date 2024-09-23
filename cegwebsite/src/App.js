@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import NavBar from './NavBar';
+import NavBar from './components/NavBar';
+import React, { useState } from 'react';
 
 function App() {
+  const [currentTab, setCurrentTab] = useState('home'); 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar  currentTab={currentTab} setCurrentTab={setCurrentTab}/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
