@@ -1,5 +1,5 @@
 import React from 'react';
-import au from '../au.jpg';
+import au from '../assets/images/au.jpg';
 
 const Updates = () => {
     return (
