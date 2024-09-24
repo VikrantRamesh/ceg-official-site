@@ -1,15 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import NavBar from './components/NavBar';
-import React, { useState } from 'react';
-import Updates from './Updates';
+import logo from "./logo.svg";
+import "./App.css";
+import NavBar from "./components/NavBar";
+import React, { useState } from "react";
+import Updates from "./Updates";
+import Statistics from "./components/Statistics";
+import Departments from "./components/Departments";
 
 function App() {
-  const [currentTab, setCurrentTab] = useState('home'); 
+  const [currentTab, setCurrentTab] = useState("home");
+
   return (
     <div className="App">
-      <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+      <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
       <Updates />
+
+      {/* Place the new sections here */}
+      <Statistics />
+      <Departments />
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
