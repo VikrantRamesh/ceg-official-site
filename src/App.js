@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Updates from "./Updates";
 import Statistics from "./components/Statistics";
 import Departments from "./components/Departments";
+import VisionMission from "./components/VisionMission";
 
 function App() {
   const [currentTab, setCurrentTab] = useState("home");
@@ -13,8 +14,7 @@ function App() {
     <div className="App">
       <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
       <Updates />
-
-      {/* Place the new sections here */}
+      <VisionMission />
       <Statistics />
       <Departments />
 
