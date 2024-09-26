@@ -14,15 +14,16 @@ import {
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+// Icon styles for color customization
 const iconStyles = [
-  { color: "#FF5733" },
-  { color: "#33B5FF" },
-  { color: "#FF33C4" },
-  { color: "#FFBB33" },
-  { color: "#33FF6B" },
-  { color: "#FF6F33" },
-  { color: "#FF5733" },
-  { color: "#33D4FF" },
+  { color: "#FF5733" }, // ACOE (Red/Orange)
+  { color: "#33B5FF" }, // e-Governance (Blue)
+  { color: "#FF33C4" }, // International Relations (Pink)
+  { color: "#FFBB33" }, // Library (Yellow/Orange)
+  { color: "#33FF6B" }, // Placement Cell (Green)
+  { color: "#FF6F33" }, // Health Centre (Dark Orange)
+  { color: "#FF5733" }, // SC/ST Cell (Red/Orange)
+  { color: "#33D4FF" }, // POSH (Light Blue)
 ];
 
 const Facilities = () => {
@@ -43,7 +44,6 @@ const Facilities = () => {
     { title: "Health Centre", path: "/health-centre", icon: <FaHospital /> },
     { title: "SC/ST Cell", path: "/sc-st-cell", icon: <FaFileContract /> },
     { title: "POSH", path: "/posh", icon: <FaUserShield /> },
-    // Add more facilities as needed
   ];
 
   // Slick settings for the carousel
@@ -86,17 +86,30 @@ const Facilities = () => {
           <div key={index} className="p-4">
             <Link to={section.path}>
               <div
-                className="bg-white text-black p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-110 hover:rotate-1 text-center" // Added rotation and scaling animation
+                className="bg-gradient-to-r from-teal-400 to-cyan-500
+text-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-500 ease-in-out transform hover:scale-110 hover:rotate-2 text-center relative group"
+                // Added gradient, shadow, and transition for a modern look
               >
                 {/* Icon */}
                 <div
-                  className="text-6xl mb-4 mx-auto flex items-center justify-center h-20 w-20 rounded-full transition-transform duration-300 ease-in-out"
-                  style={iconStyles[index]}
+                  className="text-6xl mb-4 mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-white text-black transform transition-transform duration-300 ease-in-out group-hover:animate-bounce"
+                  style={iconStyles[index]} // Apply different color to each icon
                 >
                   {section.icon}
                 </div>
+
+                {/* Animated Dots */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="animate-pulse absolute top-0 left-1/2 h-2 w-2 bg-white rounded-full"></div>
+                  <div className="animate-pulse absolute right-1/2 bottom-0 h-2 w-2 bg-white rounded-full"></div>
+                  <div className="animate-pulse absolute top-1/2 right-0 h-2 w-2 bg-white rounded-full"></div>
+                  <div className="animate-pulse absolute bottom-1/2 left-0 h-2 w-2 bg-white rounded-full"></div>
+                </div>
+
                 {/* Title */}
-                <h3 className="text-lg font-semibold">{section.title}</h3>
+                <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-yellow-300">
+                  {section.title}
+                </h3>
               </div>
             </Link>
           </div>
