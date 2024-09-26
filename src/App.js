@@ -1,38 +1,37 @@
-import logo from "./logo.svg";
-import "./App.css";
-import NavBar from "./components/NavBar";
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import Updates from "./components/Updates";
 import Statistics from "./components/Statistics";
 import Departments from "./components/Departments";
 import VisionMission from "./components/VisionMission";
+import StudentActivity from "./components/StudentActivity";
+import Facilities from "./components/Facilities"; // Import Facilities
 
 function App() {
   const [currentTab, setCurrentTab] = useState("home");
 
   return (
-    <div className="App">
-      <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
-      <Updates />
-      <VisionMission />
-      <Statistics />
-      <Departments />
-
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Updates />
+                <VisionMission />
+                <Statistics />
+                <Departments />
+                <StudentActivity />
+                <Facilities />
+              </>
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
