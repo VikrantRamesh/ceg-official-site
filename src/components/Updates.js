@@ -48,7 +48,7 @@ const Updates = () => {
     ];
 
     return (
-        <div className="relative w-full h-screen overflow-hidden">
+        <div className="relative w-full lg:h-screen overflow-hidden">
             {/* Parallax Background Image */}
             <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -78,8 +78,8 @@ const Updates = () => {
             <div className="relative z-10 flex flex-col md:flex-col lg:flex-row items-start lg:items-center lg:justify-between h-full p-6 lg:p-12 justify-evenly">
                 {/* "Anna University" text for medium screens and above */}
                 <div className="w-full lg:w-6/12 items-center text-center md:text-center lg:text-right mb-6 lg:mb-0 md:order-first lg:order-last relative z-20">
-                    <h1 className="text-4xl lg:text-6xl  text-red-800">ANNA UNIVERSITY</h1>
-                    <p className="text-lg lg:text-xl font-normal text-red-800 mt-4">
+                    <h1 className="text-5xl lg:text-6xl text-red-800">ANNA UNIVERSITY</h1>
+                    <p className="text-xl font-bold lg:font-normal text-red-800 mt-4">
                         With a dream and vision, beyond boundaries
                     </p>
                 </div>
