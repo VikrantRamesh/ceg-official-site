@@ -16,14 +16,14 @@ import "slick-carousel/slick/slick-theme.css";
 
 // Icon styles for color customization
 const iconStyles = [
-  { color: "#FF5733" }, // ACOE (Red/Orange)
-  { color: "#33B5FF" }, // e-Governance (Blue)
-  { color: "#FF33C4" }, // International Relations (Pink)
-  { color: "#FFBB33" }, // Library (Yellow/Orange)
-  { color: "#33FF6B" }, // Placement Cell (Green)
-  { color: "#FF6F33" }, // Health Centre (Dark Orange)
-  { color: "#FF5733" }, // SC/ST Cell (Red/Orange)
-  { color: "#33D4FF" }, // POSH (Light Blue)
+  { color: "#FF5733" },
+  { color: "#33B5FF" },
+  { color: "#FF33C4" },
+  { color: "#FFBB33" },
+  { color: "#33FF6B" },
+  { color: "#FF6F33" },
+  { color: "#FF5733" },
+  { color: "#33D4FF" },
 ];
 
 const Facilities = () => {
@@ -92,8 +92,8 @@ text-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-500 eas
               >
                 {/* Icon */}
                 <div
-                  className="text-6xl mb-4 mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-white text-black transform transition-transform duration-300 ease-in-out group-hover:animate-bounce"
-                  style={iconStyles[index]} // Apply different color to each icon
+                  className="text-6xl mb-4 mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-white text-black transform transition-transform duration-300 ease-in-out"
+                  style={iconStyles[index]}
                 >
                   {section.icon}
                 </div>
