@@ -27,6 +27,17 @@ const activities = [
     imageUrl: require("../assets/images/NCC.png"),
     path: "https://aunccarmy.vercel.app/",
   },
+
+  {
+    title: "Clubs and Socities",
+    imageUrl: require("../assets/images/cs.png"),
+    path: "/clubsandsocieties",
+  },
+  {
+    title: "Sports Board",
+    imageUrl: require("../assets/images/NSO.jpeg"),
+    path: "/clubsandsocieties",
+  },
 ];
 
 const StudentActivity = () => {
@@ -48,8 +59,6 @@ const StudentActivity = () => {
                 <h3 className="text-lg font-semibold">{activity.title}</h3>
               </div>
             </div>
-            {/* Optional: Add a hover effect on title */}
-            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity"></div>
           </Link>
         ))}
       </div>
