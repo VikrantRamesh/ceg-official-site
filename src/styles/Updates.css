@@ -1,0 +1,21 @@
+@keyframes scrollVertical {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+.animate-scroll-vertical {
+    animation: scrollVertical 10s linear infinite;
+}
+
+h2{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+} 
+
+h1{
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
