@@ -35,7 +35,7 @@ const Updates = () => {
     useEffect(() => {
         const fetchUpdates = async () => {
             try {
-                const response = await axios.get('/api/get_updates.php');
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/landing/updates`);
                 const data = response.data;
 
                 // Split the updates into student and general categories

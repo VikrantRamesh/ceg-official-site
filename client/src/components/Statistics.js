@@ -7,7 +7,7 @@ const Statistics = () => {
   useEffect(() => {
       const fetchUpdates = async () => {
           try {
-              const response = await axios.get('/api/get_stats.php');
+              const response = await axios.get(`${process.env.REACT_APP_API_URL}/landing/statistics`);
               const stats = response.data;
               setStatistics(stats);
           } catch (error) {
