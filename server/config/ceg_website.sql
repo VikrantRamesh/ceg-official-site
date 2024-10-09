@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2024 at 01:14 PM
+-- Generation Time: Oct 09, 2024 at 06:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -67,6 +67,28 @@ INSERT INTO `updates` (`id`, `category`, `message`, `link`, `created_date`) VALU
 (1, 'Student', 'Student Event 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'https://google.com', '2024-10-05 18:30:00'),
 (2, 'General', 'Exam Timetable Released: Check the official portal for details.', NULL, '2024-10-05 18:30:00');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `type`, `created_on`) VALUES
+(2, 'admin', '$2a$12$bUYgCrv9m9kG9oI0YHVDsu5.2AzVe6meqst8nM/xMvpBh9K1Axwgq', 'admin', '2024-10-09 13:55:54'),
+(3, 'acm', '$2b$12$fBHNOBb8nrPGxu.dxx3DFes67ZUbi6O.pxMVNkCmwMnsjWnsXx9kC', 'club', '2024-10-09 14:56:08');
+
 --
 -- Indexes for dumped tables
 --
@@ -78,6 +100,12 @@ ALTER TABLE `updates`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -86,6 +114,12 @@ ALTER TABLE `updates`
 --
 ALTER TABLE `updates`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
