@@ -5,6 +5,7 @@ const session = require('express-session');
 
 const landingRoutes = require('./routes/landing');  // Import landing page routes
 const authRoutes = require('./routes/authRoutes');  // Import auth routes for login and logout
+const adminRoutes = require('./routes/adminRoutes'); // Import admin apis
 
 // Initialize the Express app
 const app = express();
@@ -28,6 +29,7 @@ app.use(session({
 // API Routes
 app.use('/api/landing', landingRoutes);  // Routes for updates and statistics
 app.use('/api/auth', authRoutes); // Use auth routes
+app.use('/api/admin', adminRoutes); //use admin routes
 
 
 // Serve static files from the React app
