@@ -18,3 +18,11 @@ exports.insertUser = async (username, password, type) => {
         console.error('Error creating user: ',err);
     }
 }
+
+exports.updatePassword = async (username, password) => {
+    try{
+        await pool.query('UPDATE users SET password = ? WHERE username = ?', [password, username]);
+    } catch (err) {
+        console.error('Error updated password: ',err);
+    }
+}

@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 
 // Login controller
 exports.login = async (req, res) => {
+  if(req.session.user){
+    return res.status(401).json({ message: 'Already logged in' });
+  }
   const { username, password } = req.body;
 
   try {
@@ -31,16 +34,29 @@ exports.login = async (req, res) => {
 
 //logout controller
 exports.logout = (req, res) => {
-    // Check if there is an active session
-    if (req.session.user) {
-      req.session.destroy((err) => {
-        if (err) {
-          return res.status(500).json({ message: 'Could not log out' });
-        }
-        return res.status(200).json({ message: 'Logout successful' });
-      });
-    } else {
-      // If no active session, return a message indicating the user is already logged out
-      return res.status(400).json({ message: 'No user is currently logged in' });
+    req.session.destroy((err) => {
+    if (err) {
+        return res.status(500).json({ message: 'Could not log out' });
     }
-  };
+    return res.status(200).json({ message: 'Logout successful' });
+    });
+};
+
+//password change controller
+exports.changePassword = async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    try{
+        const user = await userModel.getUserByUserName(req.session.user.username);
+        const match = await bcrypt.compare(oldPassword, user.password);
+        if(!match){
+            return res.status(401).json({ message: 'Old password doesn\'t match' });
+        }
+        
+        const hashedPassword = await bcrypt.hash(newPassword, 12);
+        await userModel.updatePassword(req.session.user.username, hashedPassword);
+        return res.status(200).json({ message: 'Password changed successfully'});
+    } catch (err) {
+        console.error('Login error:', err);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};

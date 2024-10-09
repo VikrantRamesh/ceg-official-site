@@ -1,5 +1,7 @@
 const express = require('express');
 const authController = require('../controllers/authController');
+const userMiddleware = require('../middleware/user');
+const clubMiddleware = require('../middleware/club');
 
 const router = express.Router();
 
@@ -8,7 +10,11 @@ const router = express.Router();
 router.post('/login', authController.login);
 
 // Logout route
-// return message
-router.post('/logout', authController.logout);
+// returns message
+router.post('/logout', userMiddleware, authController.logout);
+
+// Password change route
+// returns message
+router.post('/change-password', userMiddleware, authController.changePassword);
 
 module.exports = router;
