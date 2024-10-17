@@ -1,19 +1,21 @@
 const bcrypt = require('bcrypt');
-const userModel = require('../models/userModel')
+const userModel = require('../models/userModel');
+const clubModel = require('../models/clubModel');
 
 // Create a new club
 exports.createClub = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, clubname } = req.body;
 
   // Input validation
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password are required' });
+  if (!username || !password || !clubname) {
+    return res.status(400).json({ message: 'Username, password and club name are required' });
   }
 
   try {
     // Check if the user already exists
     const existingUser = await userModel.getUserByUserName(username);
-    if (existingUser) {
+    const existingClub = await clubModel.getClubByClubName(clubname)
+    if (existingUser || existingClub) {
       return res.status(400).json({ message: 'Username already exists' });
     }
 
@@ -21,7 +23,7 @@ exports.createClub = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     // Insert the new user into the database
-    userModel.insertUser(username, hashedPassword, "club");
+    await userModel.insertUser(username, hashedPassword, "club", clubname);
     
     return res.status(201).json({ message: 'User created successfully'});
   } catch (error) {
