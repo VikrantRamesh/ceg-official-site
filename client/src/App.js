@@ -6,7 +6,8 @@ import Statistics from "./components/Statistics";
 import Departments from "./components/Departments";
 import VisionMission from "./components/VisionMission";
 import StudentActivity from "./components/StudentActivity";
-import Facilities from "./components/Facilities"; // Import Facilities
+import Facilities from "./components/Facilities";
+import Club from "./admin/pages/Club";
 
 function App() {
   const [currentTab, setCurrentTab] = useState("home");
@@ -16,6 +17,7 @@ function App() {
       <div className="App">
         <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
         <Routes>
+        <Route path="/club/*" element={<Club />} />
           <Route
             path="/"
             element={
