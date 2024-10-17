@@ -1,17 +1,18 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 const ClubSignin = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let formErrors = {};
 
-    if (!email) {
-      formErrors.email = "Email is required";
+    if (!username) {
+      formErrors.username = "User name is required";
     }
     if (!password) {
       formErrors.password = "Password is required";
@@ -20,17 +21,38 @@ const ClubSignin = () => {
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
     } else {
-      console.log({ email, password });
-      alert("Form submitted successfully!");
+        try {
+          // Send POST request to backend
+          const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
+            username,
+            password,
+          });
+          
+          //redirect after successful login
+          if(response.status === 200){
+            alert("redirect"); //replace with redirect logic
+          }
 
-      setEmail("");
-      setPassword("");
-      setErrors({});
+          setUsername("");
+          setPassword("");
+          setErrors({});
+        } catch (error) {
+          console.error("Error submitting form:", error);
+          if( error.response.status === 401 ){
+            alert("Invalid Username or Password");
+          }
+          else if( error.response.status === 500){
+            alert("Server error");
+          }
+          else {
+            alert("Unkown error occured");
+          }
+        }
     }
   };
 
   const handleInputChange = (field, value) => {
-    if (field === "email") setEmail(value);
+    if (field === "username") setUsername(value);
     if (field === "password") setPassword(value);
 
     setErrors((prevErrors) => ({
@@ -49,22 +71,22 @@ const ClubSignin = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
               <label
-                htmlFor="email"
+                htmlFor="username"
                 className="block mb-2 font-bold text-gray-600"
               >
-                Email
+                User Name
               </label>
               <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-                placeholder="login@cegtechform.in"
+                type="text"
+                id="username"
+                name="username"
+                value={username}
+                onChange={(e) => handleInputChange("username", e.target.value)}
+                placeholder="User Name"
                 className="border border-gray-300 shadow p-3 w-full rounded"
               />
-              {errors.email && (
-                <p className="text-sm text-red-400 mt-2">{errors.email}</p>
+              {errors.username && (
+                <p className="text-sm text-red-400 mt-2">{errors.username}</p>
               )}
             </div>
 

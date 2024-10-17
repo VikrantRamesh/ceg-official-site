@@ -1,20 +1,19 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 const SuperadminSignIn = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let formErrors = {};
 
-    if (!email) {
-      formErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      formErrors.email = "Invalid email format";
-    }
+    if (!username) {
+      formErrors.username = "User name is required";
+    } 
 
     if (!password) {
       formErrors.password = "Password is required";
@@ -23,15 +22,38 @@ const SuperadminSignIn = () => {
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
     } else {
-      alert("Form submitted successfully!");
-      setEmail("");
-      setPassword("");
-      setErrors({});
+      try {
+        // Send POST request to backend
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
+          username,
+          password,
+        });
+        
+        //redirect after successful login
+        if(response.status === 200){
+          alert("redirect"); //replace with redirect logic
+        }
+
+        setUsername("");
+        setPassword("");
+        setErrors({});
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        if( error.response.status === 401 ){
+          alert("Invalid Username or Password");
+        }
+        else if( error.response.status === 500){
+          alert("Server error");
+        }
+        else {
+          alert("Unkown error occured");
+        }
+      }
     }
   };
 
   const handleInputChange = (field, value) => {
-    if (field === "email") setEmail(value);
+    if (field === "username") setUsername(value);
     if (field === "password") setPassword(value);
 
     setErrors((prevErrors) => ({
@@ -53,24 +75,24 @@ const SuperadminSignIn = () => {
           <form onSubmit={handleSubmit}>
             <div className="flex items-center mb-5">
               <label
-                htmlFor="email"
+                htmlFor="username"
                 className="w-24 inline-block text-right mr-4 text-gray-500"
               >
-                Email
+                User Name
               </label>
               <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-                placeholder="login@cegtechforum.in"
+                type="text"
+                id="username"
+                name="username"
+                value={username}
+                onChange={(e) => handleInputChange("username", e.target.value)}
+                placeholder="User Name"
                 className="border-b-2 border-gray-400 flex-1 py-2 placeholder-gray-300 outline-none focus:border-green-400"
               />
             </div>
-            {errors.email && (
+            {errors.username && (
               <p className="text-sm text-red-500 text-right mb-2">
-                {errors.email}
+                {errors.username}
               </p>
             )}
 

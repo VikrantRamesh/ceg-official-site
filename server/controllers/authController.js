@@ -23,9 +23,9 @@ exports.login = async (req, res) => {
     }
 
     // Save user info to session
-    req.session.user = {username: user.username, type: user.type};
+    req.session.user = {uid: user.id, username: user.username, type: user.type};
 
-    return res.status(200).json({ message: 'Login successful', type: user.type});
+    return res.status(200).json({ message: 'Login successful' });
   } catch (err) {
     console.error('Login error:', err);
     return res.status(500).json({ message: 'Internal server error' });
