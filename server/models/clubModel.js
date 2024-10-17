@@ -35,7 +35,6 @@ exports.getClubByClubId = async (clubid) => {
 
 // get all clubs
 exports.getAllClubs = async () =>{
-  console.log("recevd req");
   try {
     const results = await pool.query('SELECT id, clubname, description FROM clubs');
     return results;

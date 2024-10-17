@@ -41,12 +41,9 @@ exports.getAllClubs = async (req, res) => {
   
 //get club details for specific id
 exports.getClub = async (req, res) => {
-    console.log(req);
     const { clubid } = req.params; //get clubid
-    console.log(clubid);
     try {
         const result = await clubModel.getClubByClubId(clubid);
-        console.log(result);
         return res.status(200).json(result);  
     } catch (err) {
         console.error(err);
