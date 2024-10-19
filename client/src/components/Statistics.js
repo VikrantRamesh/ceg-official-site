@@ -32,11 +32,11 @@ const Statistics = () => {
             <p className="text-sm font-light  mt-3">Research Centres</p>
           </div>
           <div className="content-around bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg p-6 text-center shadow-lg rounded-lg transform hover:scale-105 transition duration-300">
-            <h1 className="text-5xl font-bold">{statistics.rd_grants}Cr+</h1>
+            <h1 className="text-5xl font-bold">{statistics.rd_grants}</h1>
             <p className="text-sm font-light  mt-3">R&D Grants</p>
           </div>
           <div className="content-around bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg p-6 text-center shadow-lg rounded-lg transform hover:scale-105 transition duration-300">
-            <h1 className="text-5xl font-bold">{statistics.publications}+</h1>
+            <h1 className="text-5xl font-bold">{statistics.publications}</h1>
             <p className="text-sm font-light  mt-3">Publications</p>
           </div>
           <div className="content-around bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg p-6 text-center shadow-lg rounded-lg transform hover:scale-105 transition duration-300">
@@ -44,7 +44,7 @@ const Statistics = () => {
             <p className="text-sm font-light  mt-3">Patents Published/Granted</p>
           </div>
           <div className="content-around bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg p-6 text-center shadow-lg rounded-lg transform hover:scale-105 transition duration-300">
-            <h1 className="text-5xl font-bold">{statistics.books_rfid_auto}K+</h1>
+            <h1 className="text-5xl font-bold">{statistics.books_rfid_auto}</h1>
             <p className="text-sm font-light  mt-3">Books RF ID - Automation</p>
           </div>
           <div className="content-around bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg p-6 text-center shadow-lg rounded-lg transform hover:scale-105 transition duration-300">

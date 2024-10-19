@@ -12,7 +12,13 @@ const Modal = ({ title, content, onClose }) => {
                 <h2 className="text-xl font-bold mb-4">{title}</h2>
                 <div className="space-y-4 max-h-80 overflow-y-auto">
                     {content.map((update, index) => (
-                        <p key={index}>{update.message}</p>
+                         <div key={update.id}>
+                            {update.link != null ? (
+                                <a href={update.link}><p key={index}>{update.message}</p></a>
+                            ) : (
+                                <p key={index}>{update.message}</p>
+                            )}
+                        </div>
                     ))}
                 </div>
                 <button 
