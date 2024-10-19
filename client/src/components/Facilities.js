@@ -10,6 +10,8 @@ import {
   FaUserShield,
   FaHospital,
   FaFileContract,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -25,6 +27,34 @@ const iconStyles = [
   { color: "#FF5733" },
   { color: "#33D4FF" },
 ];
+// Custom Next Arrow
+const NextArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div
+      className="absolute right-0 top-0 h-full z-10 cursor-pointer bg-gray-700 text-white flex items-center justify-center shadow-lg hover:bg-gray-500 transition-all duration-300"
+      onClick={onClick}
+      // style={{ width: "50px", right: "20px" }} // Set a fixed width and adjust padding
+    >
+      <FaChevronRight size={30} />
+    </div>
+  );
+};
+
+// Custom Prev Arrow
+const PrevArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div
+      className="absolute left-0 top-0 h-full z-10 cursor-pointer bg-gray-700 text-white flex items-center justify-center shadow-lg hover:bg-gray-500 transition-all duration-300"
+      onClick={onClick}
+      // style={{ width: "50px", left: "20px" }} // Set a fixed width and adjust padding
+    >
+      <FaChevronLeft size={30} />
+    </div>
+  );
+};
+
 
 const Facilities = () => {
   const sections = [
@@ -48,14 +78,16 @@ const Facilities = () => {
 
   // Slick settings for the carousel
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    speed: 500,
+    speed: 300,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 1000,
     pauseOnHover: true,
+    nextArrow: <NextArrow />, // Custom Next Arrow
+    prevArrow: <PrevArrow />, // Custom Prev Arrow
     responsive: [
       {
         breakpoint: 1024,
@@ -79,16 +111,17 @@ const Facilities = () => {
   };
 
   return (
-    <div className="mt-8 px-4">
-      <h2 className="text-4xl font-bold mb-8 text-center">Facilities</h2>
+    <>
+      <hr className="h-1 mx-auto mb-2 border-0 rounded  bg-gray-800" />
+
+      <h2 className="text-4xl font-bold mb-2 mt-2 text-center text-gray-800">FACILITIES</h2>
+      <div className="mt-2 bg-gray-800">
       <Slider {...settings}>
         {sections.map((section, index) => (
           <div key={index} className="p-4">
             <Link to={section.path}>
               <div
-                className="bg-gradient-to-r from-teal-400 to-cyan-500
-text-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-500 ease-in-out transform hover:scale-110 hover:rotate-2 text-center relative group"
-                // Added gradient, shadow, and transition for a modern look
+                className="h-56 bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition duration-500 ease-in-out transform hover:scale-110 text-center relative group"
               >
                 {/* Icon */}
                 <div
@@ -107,7 +140,7 @@ text-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-500 eas
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-yellow-300">
+                <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-orange-600">
                   {section.title}
                 </h3>
               </div>
@@ -116,6 +149,7 @@ text-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-500 eas
         ))}
       </Slider>
     </div>
+    </>
   );
 };
 

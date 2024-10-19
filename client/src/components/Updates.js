@@ -12,7 +12,13 @@ const Modal = ({ title, content, onClose }) => {
                 <h2 className="text-xl font-bold mb-4">{title}</h2>
                 <div className="space-y-4 max-h-80 overflow-y-auto">
                     {content.map((update, index) => (
-                        <p key={index}>{update.message}</p>
+                         <div key={update.id}>
+                            {update.link != null ? (
+                                <a href={update.link}><p key={index}>{update.message}</p></a>
+                            ) : (
+                                <p key={index}>{update.message}</p>
+                            )}
+                        </div>
                     ))}
                 </div>
                 <button 
@@ -79,6 +85,7 @@ const Updates = () => {
                 }}
             >
             </div>
+
             <div className="relative z-10 flex flex-col md:flex-col lg:flex-row items-start lg:items-center lg:justify-between h-full p-6 lg:p-12 justify-evenly">
                 {/* "Anna University" text for medium screens and above */}
                 <div className="w-full lg:w-6/12 items-center text-center md:text-center lg:text-right mb-6 lg:mb-0 md:order-first lg:order-last relative z-20">
@@ -95,19 +102,19 @@ const Updates = () => {
                         <h2 className="text-lg lg:text-2xl font-bold mb-2 text-red-800 text-center">Student Updates</h2>
                         <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-red-700">
                             <div className="space-y-4 animate-scroll-vertical">
-                            {studentUpdates.length > 0 ? (
-                                studentUpdates.map(update => (
-                                    <div key={update.id}>
-                                        {update.link != null ? (
-                                            <a href={update.link}><p>{update.message}</p></a>
-                                        ) : (
-                                            <p>{update.message}</p>
-                                        )}
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No student updates available.</p>
-                            )}
+                                {studentUpdates.length > 0 ? (
+                                    studentUpdates.map(update => (
+                                        <div key={update.id}>
+                                            {update.link != null ? (
+                                                <a href={update.link}><p>{update.message}</p></a>
+                                            ) : (
+                                                <p>{update.message}</p>
+                                            )}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>No student updates available.</p>
+                                )}
                             </div>
                         </div>
                          {/* "View All" Button */}
@@ -124,19 +131,19 @@ const Updates = () => {
                         <h2 className="text-lg lg:text-2xl  font-bold mb-2 text-red-800 text-center">General Updates</h2>
                         <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-red-700">
                             <div className="space-y-4 animate-scroll-vertical">
-                            {generalUpdates.length > 0 ? (
-                                generalUpdates.map(update => (
-                                    <div key={update.id}>
-                                        {update.link != null ? (
-                                            <a href={update.link}><p>{update.message}</p></a>
-                                        ) : (
-                                            <p>{update.message}</p>
-                                        )}
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No student updates available.</p>
-                            )}
+                                {generalUpdates.length > 0 ? (
+                                    generalUpdates.map(update => (
+                                        <div key={update.id}>
+                                            {update.link != null ? (
+                                                <a href={update.link}><p>{update.message}</p></a>
+                                            ) : (
+                                                <p>{update.message}</p>
+                                            )}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>No student updates available.</p>
+                                )}
                             </div>
                         </div>
                          {/* "View All" Button */}
