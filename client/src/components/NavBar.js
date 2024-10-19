@@ -91,11 +91,6 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
       items: ['Profile', 'History', 'Mission & Vision'],
     },
     {
-      label: 'Dean Desk',
-      tabName: 'dean-desk',
-      items: ['Dean Profile', 'Dean Office Staff Members'],
-    },
-    {
       label: 'Academics & Admissions',
       tabName: 'academics',
       items: ['Center for Admissions (UG/PG)', 'Departments', 'Courses Offered', 'Curriculum and syllabi'],
@@ -167,8 +162,8 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
         <div className="flex items-center">
           <img src={CEGLogo} alt="CEG Logo" className="h-12 mr-6 ml-6 mt-3 mb-3" style={{ height: '7vh' }} />
           <div className="flex flex-col">
-            <span className="lg:text-3xl text-2xl font-bold tracking-wider mb-1">CEG CAMPUS</span>
-            <span className="text-md tracking-normal">Anna University, Chennai</span>
+            <span className="lg:text-3xl md:text-2xl text-xl font-bold tracking-wider mb-1">CEG CAMPUS</span>
+            <span className="lg:text-md text-sm text-center tracking-normal">Anna University, Chennai</span>
           </div>
           <img src={AU_logo} alt="CEG Logo" className="h-12 mr-6 ml-6 mt-3 mb-3" style={{ height: '7vh' }} />
         </div>

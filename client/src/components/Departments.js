@@ -108,8 +108,8 @@ const departments = [
 
 const Departments = () => {
   return (
-    <div className="p-6 pr-12 pl-12 bg-white">
-      <h2 className="text-2xl font-bold mb-4 text-center">Departments</h2>
+    <div className="p-6 pr-12 pl-12 ">
+      <h2 className="lg:text-4xl text-2xl font-bold mb-4 text-center" style={{color: '#2b2a4c'}}>DEPARTMENTS</h2>
       <div className="grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 gap-4">
         {departments.map((department) => (
           <a

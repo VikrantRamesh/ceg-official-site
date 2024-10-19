@@ -42,9 +42,9 @@ const activities = [
 
 const StudentActivity = () => {
   return (
-    <div className="py-8 px-4">
-      <h2 className="text-4xl font-bold mb-8 text-center">
-        Student Activities
+    <div className="py-16 px-4">
+      <h2 className="text-4xl font-bold mb-8 text-center text-gray-800">
+        STUDENT ACTIVITIES
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {activities.map((activity, index) => (

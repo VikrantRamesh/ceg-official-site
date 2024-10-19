@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, {useState} from 'react';
 import au from '../assets/images/Anna_university.jpg';
 import whiteCut from '../assets/images/white_cut.png'; // Importing white_cut image
 import '../styles/Updates.css';
@@ -12,7 +11,7 @@ const Modal = ({ title, content, onClose }) => {
                 <h2 className="text-xl font-bold mb-4">{title}</h2>
                 <div className="space-y-4 max-h-80 overflow-y-auto">
                     {content.map((update, index) => (
-                        <p key={index}>{update.message}</p>
+                        <p key={index}>{update}</p>
                     ))}
                 </div>
                 <button 
@@ -29,28 +28,24 @@ const Modal = ({ title, content, onClose }) => {
 const Updates = () => {
     const [showStudentModal, setShowStudentModal] = useState(false);
     const [showGeneralModal, setShowGeneralModal] = useState(false);
-    const [studentUpdates, setStudentUpdates] = useState([]);
-    const [generalUpdates, setGeneralUpdates] = useState([]);
 
-    useEffect(() => {
-        const fetchUpdates = async () => {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/landing/updates`);
-                const data = response.data;
+    const studentUpdates = [
+        "Student Event 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "Exam Timetable Released: Check the official portal for details.",
+        "Student Workshop on AI: Register before the deadline.",
+        "Holiday Announcement: University will remain closed on October 2.",
+        "New Library Hours: 8 AM to 10 PM on weekdays.",
+        "Student Event 2: Seminars on Data Science happening next week."
+    ];
 
-                // Split the updates into student and general categories
-                const students = data.filter(update => update.category.toLowerCase() === 'student');
-                const general = data.filter(update => update.category.toLowerCase() === 'general');
-
-                setStudentUpdates(students);
-                setGeneralUpdates(general);
-            } catch (error) {
-                console.log(error.message);
-            }
-        };
-        fetchUpdates();
-    }, []);
-
+    const generalUpdates = [
+        "University Rankings: Anna University ranked in the top 10 in India.",
+        "Convocation Ceremony: Scheduled for November 15th.",
+        "New Research Center: Inaugurated for advanced studies in nanotechnology.",
+        "Alumni Meet: Gathering planned for December 2024.",
+        "Infrastructure Update: New auditorium under construction.",
+        "General Announcement: University campus Wi-Fi upgraded."
+    ];
 
     return (
         <div className="relative w-full lg:h-screen overflow-hidden">
@@ -79,6 +74,7 @@ const Updates = () => {
                 }}
             >
             </div>
+
             <div className="relative z-10 flex flex-col md:flex-col lg:flex-row items-start lg:items-center lg:justify-between h-full p-6 lg:p-12 justify-evenly">
                 {/* "Anna University" text for medium screens and above */}
                 <div className="w-full lg:w-6/12 items-center text-center md:text-center lg:text-right mb-6 lg:mb-0 md:order-first lg:order-last relative z-20">
@@ -95,19 +91,12 @@ const Updates = () => {
                         <h2 className="text-lg lg:text-2xl font-bold mb-2 text-red-800 text-center">Student Updates</h2>
                         <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-red-700">
                             <div className="space-y-4 animate-scroll-vertical">
-                            {studentUpdates.length > 0 ? (
-                                studentUpdates.map(update => (
-                                    <div key={update.id}>
-                                        {update.link != null ? (
-                                            <a href={update.link}><p>{update.message}</p></a>
-                                        ) : (
-                                            <p>{update.message}</p>
-                                        )}
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No student updates available.</p>
-                            )}
+                                <p>Student Event 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <p>Exam Timetable Released: Check the official portal for details.</p>
+                                <p>Student Workshop on AI: Register before the deadline.</p>
+                                <p>Holiday Announcement: University will remain closed on October 2.</p>
+                                <p>New Library Hours: 8 AM to 10 PM on weekdays.</p>
+                                <p>Student Event 2: Seminars on Data Science happening next week.</p>
                             </div>
                         </div>
                          {/* "View All" Button */}
@@ -124,19 +113,12 @@ const Updates = () => {
                         <h2 className="text-lg lg:text-2xl  font-bold mb-2 text-red-800 text-center">General Updates</h2>
                         <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-red-700">
                             <div className="space-y-4 animate-scroll-vertical">
-                            {generalUpdates.length > 0 ? (
-                                generalUpdates.map(update => (
-                                    <div key={update.id}>
-                                        {update.link != null ? (
-                                            <a href={update.link}><p>{update.message}</p></a>
-                                        ) : (
-                                            <p>{update.message}</p>
-                                        )}
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No student updates available.</p>
-                            )}
+                                <p>University Rankings: Anna University ranked in the top 10 in India.</p>
+                                <p>Convocation Ceremony: Scheduled for November 15th.</p>
+                                <p>New Research Center: Inaugurated for advanced studies in nanotechnology.</p>
+                                <p>Alumni Meet: Gathering planned for December 2024.</p>
+                                <p>Infrastructure Update: New auditorium under construction.</p>
+                                <p>General Announcement: University campus Wi-Fi upgraded.</p>
                             </div>
                         </div>
                          {/* "View All" Button */}

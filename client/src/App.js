@@ -6,7 +6,9 @@ import Statistics from "./components/Statistics";
 import Departments from "./components/Departments";
 import VisionMission from "./components/VisionMission";
 import StudentActivity from "./components/StudentActivity";
+import DeanProfile from "./components/DeanProfile";
 import Facilities from "./components/Facilities"; // Import Facilities
+import au from "./assets/images/hexagon.jpg";
 
 function App() {
   const [currentTab, setCurrentTab] = useState("home");
@@ -21,9 +23,18 @@ function App() {
             element={
               <>
                 <Updates />
-                <VisionMission />
                 <Statistics />
-                <Departments />
+                <DeanProfile />
+                <div
+                 style={{ backgroundImage: `url(${au})`,
+                          backgroundRepeat:'no-repeat',
+                          backgroundSize: 'cover',
+                          backgroundBlendMode: 'difference'
+                           }}
+                >
+                  <VisionMission />
+                  <Departments />
+                </div>
                 <StudentActivity />
                 <Facilities />
               </>
