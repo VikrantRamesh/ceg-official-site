@@ -8,7 +8,7 @@ import VisionMission from "./components/VisionMission";
 import StudentActivity from "./components/StudentActivity";
 import DeanProfile from "./components/DeanProfile";
 import Facilities from "./components/Facilities"; // Import Facilities
-import au from "./assets/images/hexagon.jpg";
+import Club from "./admin/pages/Club";
 
 function App() {
   const [currentTab, setCurrentTab] = useState("home");
@@ -18,6 +18,7 @@ function App() {
       <div className="App">
         <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
         <Routes>
+        <Route path="/club/*" element={<Club />} />
           <Route
             path="/"
             element={
