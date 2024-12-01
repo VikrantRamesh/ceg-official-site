@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import clubLogo from '../assets/images/acm-ceg-logo.png'
+import clubLogo from '../assets/images/acm-ceg-logo.png';
 
 const ClubPage = () => {
   const [boxHeight, setBoxHeight] = useState(200);
