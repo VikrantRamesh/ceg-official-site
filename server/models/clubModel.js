@@ -36,7 +36,7 @@ exports.getClubByClubId = async (clubid) => {
 // get all clubs
 exports.getAllClubs = async () =>{
   try {
-    const results = await pool.query('SELECT id, clubname, description FROM clubs');
+    const results = await pool.query('SELECT id, clubname as name, emoji as icon FROM clubs');
     return results;
   } catch (err) {
     console.error('Error fetching club list: ', err);

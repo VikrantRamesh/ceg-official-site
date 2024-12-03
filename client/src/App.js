@@ -24,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/club/*" element={<Club />} />
           <Route path="/club_home/*" element={<ClubHomePage />} />
-          <Route path="/club_landing/*" element={<ClubPage />} />
+          <Route path="/club_landing/:id" element={<ClubPage />} />
           <Route
             path="/"
             element={

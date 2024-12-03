@@ -1,23 +1,55 @@
-
-import React from "react";
-import clubLogo from "../assets/images/acm-ceg-logo.png";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const ClubPage = () => {
+  const { id } = useParams(); // Extract the dynamic part of the URL
+  const [clubDetails, setClubDetails] = useState(null); // State to store club details
+  const [memberDetails, setMemberDetails] = useState([]); // Default to empty array if members data is empty
+  const [error, setError] = useState(null); // State to handle errors
+
+  useEffect(() => {
+    // Function to fetch club details
+    const fetchClubDetails = async () => {
+      try {
+        const response = await axios.get(`/api/club/club-info/${id}`);
+        setClubDetails(response.data); // Store the data in state
+        if (response.data.members) {
+          // Only parse if members data exists
+          setMemberDetails(JSON.parse(response.data.members)); 
+        }
+      } catch (err) {
+        console.error("Error fetching club details:", err.message);
+        setError("Failed to fetch club details. Please try again later.");
+      }
+    };
+    fetchClubDetails();
+  }, [id]); // Run this effect whenever `id` changes
+
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!clubDetails) {
+    return <div>Loading...</div>; // Display a loading message while fetching data
+  }
+
   return (
     <div style={styles.page}>
       <div style={styles.clubInfo} className="mx-20">
         {/* Logo Section */}
         <div style={styles.logoSection}>
-          <img src={clubLogo} alt="Club Logo" style={styles.logo} />
+          <img src={clubDetails.logo_path} alt="Club Logo" style={styles.logo} />
           <a
-            href="https://auceg.acm.org/"
+            href={clubDetails.website}
             style={styles.link}
             target="_blank"
             rel="noopener noreferrer"
           >
             <button
               type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-bold rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-bold rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Website
             </button>
@@ -30,7 +62,7 @@ const ClubPage = () => {
           >
             <button
               type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-bold rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-bold rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Socials
             </button>
@@ -41,44 +73,27 @@ const ClubPage = () => {
         <div style={styles.details}>
           <h2 className="text-3xl my-4">ACM-CEG</h2>
           <p className="font-normal">
-            The ACM-CEG Student Chapter, initiated in 2004, aims to instill an
-            unwavering enthusiasm for computer science in students. The club
-            provides a plethora of networking opportunities and helps to seek
-            advice from the top experts in the field. The club has been steadily
-            working to inculcate an unalloyed interest in Computer Science in
-            students and consequently, stimulating the advancement of computer
-            science as a whole.
+            {clubDetails.description}
           </p>
 
           {/* Members Section */}
           <div style={styles.members}>
             <h3 className="font-semibold text-xl">Members</h3>
             <div style={styles.memberList}>
-              <div style={styles.member}>
-                <span style={styles.memberName}>Ansh Bomb</span>
-                <span style={styles.memberPosition}>President</span>
-              </div>
-              <div style={styles.member}>
-                <span style={styles.memberName}>Shiyam Ganesh T</span>
-                <span style={styles.memberPosition}>Vice President</span>
-              </div>
-              <div style={styles.member}>
-                <span style={styles.memberName}>Krishna Kumar GR</span>
-                <span style={styles.memberPosition}>Human Resources</span>
-              </div>
-              <div style={styles.member}>
-                <span style={styles.memberName}>Varsha Mohan</span>
-                <span style={styles.memberPosition}>Contents & Design</span>
-              </div>
-              <div style={styles.member}>
-                <span style={styles.memberName}>Hemanth Palani</span>
-                <span style={styles.memberPosition}>Technical Design</span>
-              </div>
+              {memberDetails.length > 0 ? (
+                memberDetails.map((member, index) => (
+                  <div style={styles.member} key={index}>
+                    <span style={styles.memberName}>{member.name}</span>
+                    <span style={styles.memberPosition}>{member.role}</span>
+                  </div>
+                ))
+              ) : (
+                <p>No members available.</p>
+              )}
             </div>
           </div>
 
           {/* Events Section */}
-
           <div style={styles.events}>
             <h3 className="font-semibold text-xl mb-2">Events & Updates</h3>
             <ul className="space-y-1 list-disc list-inside">
@@ -87,7 +102,7 @@ const ClubPage = () => {
                 ACM-CEG chapter at Anna University, is a pioneering initiative
                 designed exclusively for students in grades 9-12.
               </li>
-              <li className="font-normal  pt-1">
+              <li className="font-normal pt-1">
                 Empowerment takes center stage at "CodHer," our exclusive
                 women-only hackathon designed to inspire and motivate female
                 developers to actively engage in the dynamic world of
@@ -137,7 +152,7 @@ const styles = {
     borderRadius: "10px",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   },
-  members: { margin: "20px 10px", marginTop: "30px" }, // Added margin to the entire section
+  members: { margin: "20px 10px", marginTop: "30px" },
   memberList: { display: "flex", gap: "20px", marginTop: "10px" },
   member: {
     backgroundColor: "#f4f4f4",
@@ -170,8 +185,5 @@ const styles = {
     maxHeight: "400px",
   },
 };
-
-// Adding hover effect dynamically for members
-styles.member[":hover"] = { transform: "scale(1.05)" };
 
 export default ClubPage;
