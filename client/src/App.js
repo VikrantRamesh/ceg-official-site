@@ -10,6 +10,8 @@ import DeanProfile from "./components/DeanProfile";
 import Facilities from "./components/Facilities"; // Import Facilities
 import au from "./assets/images/hexagon.jpg";
 import Club from "./admin/pages/Club";
+import ClubPage from "./pages/ClubPage";
+import ClubHomePage from "./pages/ClubHomePage";
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
         <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
         <Routes>
         <Route path="/club/*" element={<Club />} />
+        <Route path="/club_home/*" element={<ClubHomePage />} />
+        <Route path="/club_landing/*" element={<ClubPage />} />
           <Route
             path="/"
             element={
