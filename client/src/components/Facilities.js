@@ -55,7 +55,6 @@ const PrevArrow = (props) => {
   );
 };
 
-
 const Facilities = () => {
   const sections = [
     { title: "ACOE", path: "/acoe", icon: <FaUniversity /> },
@@ -114,41 +113,41 @@ const Facilities = () => {
     <>
       <hr className="h-1 mx-auto mb-2 border-0 rounded  bg-gray-800" />
 
-      <h2 className="text-4xl font-bold mb-2 mt-2 text-center text-gray-800">FACILITIES</h2>
-      <div className="mt-2 bg-gray-800">
-      <Slider {...settings}>
-        {sections.map((section, index) => (
-          <div key={index} className="p-4">
-            <Link to={section.path}>
-              <div
-                className="h-56 bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition duration-500 ease-in-out transform hover:scale-110 text-center relative group"
-              >
-                {/* Icon */}
-                <div
-                  className="text-6xl mb-4 mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-white text-black transform transition-transform duration-300 ease-in-out"
-                  style={iconStyles[index]}
-                >
-                  {section.icon}
-                </div>
+      <h2 className="text-4xl font-bold mb-2 mt-2 text-center text-gray-800">
+        FACILITIES
+      </h2>
+      <div className="mt-2 py-8 bg-gray-800">
+        <Slider {...settings}>
+          {sections.map((section, index) => (
+            <div key={index} className="p-4">
+              <Link to={section.path}>
+                <div className="h-56 bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition duration-500 ease-in-out transform hover:scale-110 text-center relative group">
+                  {/* Icon */}
+                  <div
+                    className="text-6xl mb-4 mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-white text-black transform transition-transform duration-300 ease-in-out"
+                    style={iconStyles[index]}
+                  >
+                    {section.icon}
+                  </div>
 
-                {/* Animated Dots */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="animate-pulse absolute top-0 left-1/2 h-2 w-2 bg-white rounded-full"></div>
-                  <div className="animate-pulse absolute right-1/2 bottom-0 h-2 w-2 bg-white rounded-full"></div>
-                  <div className="animate-pulse absolute top-1/2 right-0 h-2 w-2 bg-white rounded-full"></div>
-                  <div className="animate-pulse absolute bottom-1/2 left-0 h-2 w-2 bg-white rounded-full"></div>
-                </div>
+                  {/* Animated Dots */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="animate-pulse absolute top-0 left-1/2 h-2 w-2 bg-white rounded-full"></div>
+                    <div className="animate-pulse absolute right-1/2 bottom-0 h-2 w-2 bg-white rounded-full"></div>
+                    <div className="animate-pulse absolute top-1/2 right-0 h-2 w-2 bg-white rounded-full"></div>
+                    <div className="animate-pulse absolute bottom-1/2 left-0 h-2 w-2 bg-white rounded-full"></div>
+                  </div>
 
-                {/* Title */}
-                <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-orange-600">
-                  {section.title}
-                </h3>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </Slider>
-    </div>
+                  {/* Title */}
+                  <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-orange-600">
+                    {section.title}
+                  </h3>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </Slider>
+      </div>
     </>
   );
 };

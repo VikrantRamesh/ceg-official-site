@@ -10,7 +10,9 @@ import DeanProfile from "./components/DeanProfile";
 import Facilities from "./components/Facilities"; // Import Facilities
 import au from "./assets/images/hexagon.jpg";
 import Club from "./admin/pages/Club";
-
+import ClubPage from "./pages/ClubPage";
+import ClubHomePage from "./pages/ClubHomePage";
+import CollegeFooter from "./components/Footer";
 
 function App() {
   const [currentTab, setCurrentTab] = useState("home");
@@ -20,7 +22,9 @@ function App() {
       <div className="App">
         <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
         <Routes>
-        <Route path="/club/*" element={<Club />} />
+          <Route path="/club/*" element={<Club />} />
+          <Route path="/club_home/*" element={<ClubHomePage />} />
+          <Route path="/club_landing/*" element={<ClubPage />} />
           <Route
             path="/"
             element={
@@ -29,17 +33,19 @@ function App() {
                 <Statistics />
                 <DeanProfile />
                 <div
-                 style={{ backgroundImage: `url(${au})`,
-                          backgroundRepeat:'no-repeat',
-                          backgroundSize: 'cover',
-                          backgroundBlendMode: 'difference'
-                           }}
+                  style={{
+                    backgroundImage: `url(${au})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    backgroundBlendMode: "difference",
+                  }}
                 >
                   <VisionMission />
                   <Departments />
                 </div>
                 <StudentActivity />
                 <Facilities />
+                <CollegeFooter />
               </>
             }
           />
