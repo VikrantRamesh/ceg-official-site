@@ -13,6 +13,7 @@ import Club from "./admin/pages/Club";
 import ClubPage from "./pages/ClubPage";
 import ClubHomePage from "./pages/ClubHomePage";
 import CollegeFooter from "./components/Footer";
+import AdminPage from "./pages/AdminClubPage";
 
 function App() {
   const [currentTab, setCurrentTab] = useState("home");
@@ -25,6 +26,7 @@ function App() {
           <Route path="/club/*" element={<Club />} />
           <Route path="/club_home/*" element={<ClubHomePage />} />
           <Route path="/club_landing/:id" element={<ClubPage />} />
+          <Route path="/admin_club_page/*" element={<AdminPage />} />
           <Route
             path="/"
             element={
