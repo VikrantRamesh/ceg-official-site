@@ -8,9 +8,9 @@ const activities = [
     path: "/nso",
   },
   {
-    title: "Festivals",
+    title: "Events and Festivals",
     imageUrl: require("../assets/images/Festival.jpg"),
-    path: "/festivals",
+    path: "/events",
   },
   {
     title: "Youth Red Cross (YRC)",
