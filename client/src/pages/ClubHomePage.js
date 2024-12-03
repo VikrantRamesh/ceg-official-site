@@ -6,16 +6,33 @@ const ClubHomePage = () => {
     { name: "NSO", icon: "🏀", link: "/nso" },
     { name: "YRC", icon: "⛑️", link: "/yrc" },
     { name: "NCC", icon: "🪖", link: "/ncc" },
+    { name: "SAAS", icon: "🎨", link: "/saas" },
     { name: "ACM-CEG", icon: "💻", link: "/acm_ceg" },
-    { name: "CSAU", icon: "🧠", link: "/csau" },
-    { name: "CSEA", icon: "👨‍🦱", link: "/csea" },
-    { name: "Rotaract Club", icon: "🙂", link: "/rotaract-club" },
+    { name: "CSAU", icon: "💽", link: "/csau" },
+    { name: "CSEA", icon: "🎓", link: "/csea" },
+    { name: "Rotaract", icon: "🙂", link: "/rotaract-club" },
     { name: "GuindyTimes", icon: "📰", link: "/guindytimes" },
     { name: "Castle Red", icon: "♟️", link: "/castlered" },
     { name: "Shruthilaya", icon: "🎶", link: "/shruthilaya" },
-    { name: "Saptham", icon: "🪭", link: "/saptham" },
+    { name: "Saptham", icon: "🥻", link: "/saptham" },
     { name: "CTF", icon: "👩🏽‍💻", link: "/ctf" },
+    { name: "AUSEC", icon: "👨🏽‍💼", link: "/ausec" },
+    { name: "Theatron", icon: "🎬", link: "/theatron" },
+    { name: "Pixels", icon: "📸", link: "/pixels" },
+    { name: "Astro", icon: "🚀", link: "/astro" },
+    { name: "Robotics", icon: "🤖", link: "/robotics" },
+    { name: "EQ", icon: "💌", link: "/eq" },
+    { name: "Siruthuligal", icon: "🤗", link: "/siruthuligal" },
+    { name: "Madhavam", icon: "🪔", link: "/madhavam" },
+    { name: "CEG Spartanz", icon: "🕺🏽", link: "/spartanz" },
+    { name: "Literary", icon: "📚", link: "/literary" },
+    { name: "LEO", icon: "🦁", link: "/leo" },
+    { name: "Green Brigade", icon: "🌳", link: "/greenbrigade" },
+    { name: "Aakrithi", icon: "🪆", link: "/aakrithi" },
+    { name: "SCI", icon: "💡", link: "/sci" },
+    { name: "SQC", icon: "📈", link: "/sqc" },
     { name: "BeatFreaks", icon: "💃🏽", link: "/beatfreaks" },
+    { name: "Quizzers Anonymous", icon: "❓", link: "/quizzers" },
   ];
 
   return (
@@ -34,6 +51,7 @@ const ClubHomePage = () => {
     </div>
   );
 };
+
 const styles = {
   container: {
     padding: "20px",

@@ -1,5 +1,6 @@
-  import React from "react";
-  import clubLogo from "../assets/images/acm-ceg-logo.png";
+
+import React from "react";
+import clubLogo from "../assets/images/acm-ceg-logo.png";
 
   const ClubPage = () => {
     return (
@@ -76,29 +77,30 @@
               </div>
             </div>
 
-            {/* Events Section */}
-            <div style={styles.events}>
-              <h3 className="font-semibold text-xl mb-2">Events & Updates</h3>
-              <ul className="space-y-1 list-disc list-inside">
-                <li className="font-normal pt-1">
-                  Prodigy, an annual state-level technical event organized by the
-                  ACM-CEG chapter at Anna University, is a pioneering initiative
-                  designed exclusively for students in grades 9-12.
-                </li>
-                <li className="font-normal  pt-1">
-                  Empowerment takes center stage at "CodHer," our exclusive
-                  women-only hackathon designed to inspire and motivate female
-                  developers to actively engage in the dynamic world of
-                  hackathons. Providing a dedicated platform for female talent,
-                  CodHer is a showcase of skills, innovation, and collaboration.
-                </li>
-              </ul>
-            </div>
+          {/* Events Section */}
+
+          <div style={styles.events}>
+            <h3 className="font-semibold text-xl mb-2">Events & Updates</h3>
+            <ul className="space-y-1 list-disc list-inside">
+              <li className="font-normal pt-1">
+                Prodigy, an annual state-level technical event organized by the
+                ACM-CEG chapter at Anna University, is a pioneering initiative
+                designed exclusively for students in grades 9-12.
+              </li>
+              <li className="font-normal  pt-1">
+                Empowerment takes center stage at "CodHer," our exclusive
+                women-only hackathon designed to inspire and motivate female
+                developers to actively engage in the dynamic world of
+                hackathons. Providing a dedicated platform for female talent,
+                CodHer is a showcase of skills, innovation, and collaboration.
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
   const styles = {
     page: {
