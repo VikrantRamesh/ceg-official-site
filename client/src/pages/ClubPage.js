@@ -1,3 +1,4 @@
+
 import React from "react";
 import clubLogo from "../assets/images/acm-ceg-logo.png";
 
@@ -77,6 +78,7 @@ const ClubPage = () => {
           </div>
 
           {/* Events Section */}
+
           <div style={styles.events}>
             <h3 className="font-semibold text-xl mb-2">Events & Updates</h3>
             <ul className="space-y-1 list-disc list-inside">

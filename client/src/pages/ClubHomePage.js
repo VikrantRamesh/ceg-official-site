@@ -34,6 +34,7 @@ const ClubHomePage = () => {
     </div>
   );
 };
+
 const styles = {
   container: {
     padding: "20px",
