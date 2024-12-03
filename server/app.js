@@ -7,6 +7,7 @@ const landingRoutes = require('./routes/landing');  // Import landing page route
 const authRoutes = require('./routes/authRoutes');  // Import auth routes for login and logout
 const adminRoutes = require('./routes/adminRoutes'); // Import admin apis
 const clubRoutes = require('./routes/clubRoutes'); // Import club routes
+const eventRoutes = require('./routes/eventRoutes'); // Import event routes
 
 // Initialize the Express app
 const app = express();
@@ -28,11 +29,11 @@ app.use(session({
 }));
 
 // API Routes
-app.use('/api/landing', landingRoutes);  // Routes for updates and statistics
+app.use('/api/landing', landingRoutes);  // Routes for fetching updates and statistics
 app.use('/api/auth', authRoutes); // Use auth routes
 app.use('/api/admin', adminRoutes); // Use admin routes
 app.use('/api/club', clubRoutes); // Use club routes
-
+app.use('/api/event', eventRoutes); // Use event routes
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
