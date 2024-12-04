@@ -15,6 +15,7 @@ import ClubHomePage from "./pages/ClubHomePage";
 import CollegeFooter from "./components/Footer";
 import AdminPage from "./pages/AdminClubPage";
 import Events from "./pages/Events";
+import CoursesOffered from "./pages/Courses";
 
 function App() {
   const [currentTab, setCurrentTab] = useState("home");
@@ -29,6 +30,7 @@ function App() {
           <Route path="/club_landing/*" element={<ClubPage />} />
           <Route path="/admin_club_page/*" element={<AdminPage />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/courses" element={<CoursesOffered />} />
           <Route
             path="/"
             element={

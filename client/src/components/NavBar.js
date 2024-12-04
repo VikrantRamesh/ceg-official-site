@@ -154,7 +154,7 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
           link: "/academics/admissions",
         },
         { label: "Departments", link: "/academics/departments" },
-        { label: "Courses Offered", link: "/academics/courses" },
+        { label: "Courses Offered", link: "/courses" },
         { label: "Curriculum and syllabi", link: "/academics/curriculum" },
       ],
     },
