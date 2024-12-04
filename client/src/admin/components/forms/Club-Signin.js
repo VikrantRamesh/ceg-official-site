@@ -26,7 +26,7 @@ const ClubSignin = () => {
           const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
             username,
             password,
-          });
+          }, { withCredentials: true });
           
           //redirect after successful login
           if(response.status === 200){

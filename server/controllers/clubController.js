@@ -7,7 +7,6 @@ exports.updateClub = async (req, res) => {
 
     // Process uploaded files
     const logo_path = req.files['logo'] ? req.files['logo'][0].path : null;
-    const banner_path = req.files['banner'] ? req.files['banner'][0].path : null;
 
     // Prepare the club data for update
     const clubData = {
@@ -16,7 +15,6 @@ exports.updateClub = async (req, res) => {
         website,
         members: JSON.parse(members),
         logo_path,
-        banner_path,
     };
 
     try {
@@ -43,8 +41,16 @@ exports.getAllClubs = async (req, res) => {
 exports.getClub = async (req, res) => {
     const { clubid } = req.params; //get clubid
     try {
-        const result = await clubModel.getClubByClubId(clubid);
-        return res.status(200).json(result);  
+        if (clubid != -1) {
+            const result = await clubModel.getClubByClubId(clubid);
+            return res.status(200).json(result); 
+        } 
+        else {
+            
+            console.log(req.session);
+            const result = await clubModel.getClubByUserId(req.session.user.uid);
+            return res.status(200).json(result);
+        }
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Error fetching record '});

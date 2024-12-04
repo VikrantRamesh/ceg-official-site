@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import {
   FaGlobe,
   FaInstagram,
@@ -11,20 +12,17 @@ import {
 
 const AdminPage = () => {
   const [clubDetails, setClubDetails] = useState({
-    name: "ACM-CEG",
-    description:
-      "The ACM-CEG Student Chapter, initiated in 2004, aims to instill an unwavering enthusiasm for computer science in students. The club provides a plethora of networking opportunities and helps to seek advice from the top experts in the field. The club has been steadily working to inculcate an unalloyed interest in Computer Science in students and consequently, stimulating the advancement of computer science as a whole.",
+    name: "",
+    description: "",
     image: null,
   });
 
   const [members, setMembers] = useState([
-    { name: "Ansh Bomb", position: "President" },
-    { name: "Shiyam Ganesh T", position: "Vice President" },
+    { name: "", position: "" },
   ]);
 
   const [events, setEvents] = useState([
-    { description: "Prodigy event description.", link: "" },
-    { description: "CodHer event description.", link: "" },
+    { description: "", link: "" },
   ]);
 
   const [socials, setSocials] = useState({
@@ -39,6 +37,30 @@ const AdminPage = () => {
   const fileInputRef = useRef(null);
 
   // Handlers for club details
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/club/club-info/-1`, { withCredentials: true });
+        const { clubDetails, members, events, socials } = response.data;
+
+        setClubDetails(clubDetails || {});
+        setMembers(members || []);
+        setEvents(events || []);
+        setSocials(socials || {
+          website: "",
+          instagram: "",
+          facebook: "",
+          twitter: "",
+          linkedin: "",
+          youtube: "",
+        });
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const handleDetailsChange = (e) => {
     const { name, value } = e.target;
     setClubDetails({ ...clubDetails, [name]: value });
@@ -90,13 +112,21 @@ const AdminPage = () => {
     setSocials({ ...socials, [name]: value });
   };
 
-  // Submission handler (mock functionality)
-  const handleSubmit = () => {
-    console.log("Updated Club Details: ", clubDetails);
-    console.log("Updated Members: ", members);
-    console.log("Updated Events: ", events);
-    console.log("Updated Socials: ", socials);
-    alert("Updates submitted successfully!");
+   // Submission handler
+   const handleSubmit = async () => {
+    try {
+      const payload = {
+        clubDetails,
+        members,
+        events,
+        socials,
+      };
+      await axios.put("/api/admin/update-club-details", payload);
+      alert("Updates submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting updates: ", error);
+      alert("Failed to submit updates. Please try again.");
+    }
   };
 
   return (
