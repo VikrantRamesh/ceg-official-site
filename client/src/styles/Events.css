@@ -1,0 +1,113 @@
+/* General Styles */
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .events-section {
+    padding: 3rem 1rem;
+    background: #f5f5f5;
+  }
+  
+  .events-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #8b0000;
+    margin-bottom: 2rem;
+  }
+  
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 0 2rem;
+  }
+  
+  /* Event Card */
+  .event-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .event-image-wrapper {
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .event-card:hover .event-image {
+    transform: scale(1.1);
+  }
+  
+  /* Event Details */
+  .event-details {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .event-name {
+    font-size: 1.5rem;
+    color: #8b0000;
+    margin-bottom: 0.5rem;
+  }
+  
+  .event-date {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  
+  .event-description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  
+  .event-button {
+    padding: 0.5rem 1rem;
+    background-color: #8b0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .event-button:hover {
+    background-color: #a83232;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1.5s ease-in-out forwards;
+  }
+  

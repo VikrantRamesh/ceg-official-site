@@ -154,7 +154,7 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
           link: "/academics/admissions",
         },
         { label: "Departments", link: "/academics/departments" },
-        { label: "Courses Offered", link: "/academics/courses" },
+        { label: "Courses Offered", link: "/courses" },
         { label: "Curriculum and syllabi", link: "/academics/curriculum" },
       ],
     },
@@ -180,7 +180,7 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
           label: "Students Quality Club",
           link: "/student-activities/quality-club",
         },
-        { label: "Festivals", link: "/student-activities/festivals" },
+        { label: "Events and Festivals", link: "/events" },
         {
           label: "Clubs and Societies",
           link: "/club_home",
