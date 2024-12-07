@@ -30,7 +30,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET, // A secret key for signing the session ID cookie
   resave: process.env.RESAVE, // Don't save session if unmodified
   saveUninitialized: process.env.SAVE_UNINITIALIZED, // Don't create a session until something is stored
-  cookie: { secure: process.env.COOKIES_SECURE,  sameSite: 'None', httpOnly: true } // Set true if using HTTPS
+  cookie: { secure: process.env.COOKIES_SECURE,  sameSite: 'Lax', httpOnly: true } // Set true if using HTTPS
 }));
 
 // API Routes

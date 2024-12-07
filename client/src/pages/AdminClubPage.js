@@ -18,7 +18,7 @@ const AdminPage = () => {
   });
 
   const [members, setMembers] = useState([
-    { name: "", position: "" },
+    { name: "", role: "" },
   ]);
 
   const [events, setEvents] = useState([
@@ -41,18 +41,28 @@ const AdminPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/club/club-info/-1`, { withCredentials: true });
-        const { clubDetails, members, events, socials } = response.data;
 
-        setClubDetails(clubDetails || {});
-        setMembers(members || []);
-        setEvents(events || []);
-        setSocials(socials || {
-          website: "",
-          instagram: "",
-          facebook: "",
-          twitter: "",
-          linkedin: "",
-          youtube: "",
+        const fetchedClubDetails = {
+          image: response.data.logo_path,
+          name: response.data.clubname,
+          description: response.data.description,
+        }
+
+        setClubDetails(fetchedClubDetails || {});
+        setEvents(response.data.events || []);
+
+        // Parse the social media string and format it
+        const parsedMembers = JSON.parse(response.data.members);
+        setMembers( parsedMembers || [{ name: "", role: "" }]);
+
+        const parsedSocials = response.data.socials ? JSON.parse(response.data.socials) : {};
+        setSocials({
+          website: response.data.website || "",
+          instagram: parsedSocials.insta || "",
+          facebook: parsedSocials.facebook || "",
+          twitter: parsedSocials.twitter || "",
+          linkedin: parsedSocials.linkedin || "",
+          youtube: parsedSocials.youtube || "",
         });
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -61,6 +71,7 @@ const AdminPage = () => {
 
     fetchData();
   }, []);
+
   const handleDetailsChange = (e) => {
     const { name, value } = e.target;
     setClubDetails({ ...clubDetails, [name]: value });
@@ -87,7 +98,7 @@ const AdminPage = () => {
     setMembers(updatedMembers);
   };
 
-  const addMember = () => setMembers([...members, { name: "", position: "" }]);
+  const addMember = () => setMembers([...members, { name: "", role: "" }]);
 
   const removeMember = (index) => {
     setMembers(members.filter((_, i) => i !== index));
@@ -112,8 +123,8 @@ const AdminPage = () => {
     setSocials({ ...socials, [name]: value });
   };
 
-   // Submission handler
-   const handleSubmit = async () => {
+  // Submission handler
+  const handleSubmit = async () => {
     try {
       const payload = {
         clubDetails,
@@ -197,38 +208,41 @@ const AdminPage = () => {
         <div>
           <h2 className="text-2xl mb-4">Club Members</h2>
           <div className="space-y-4">
-            {members.map((member, index) => (
-              <div key={index} className="flex items-center space-x-4">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={member.name}
-                  onChange={(e) =>
-                    handleMemberChange(index, "name", e.target.value)
-                  }
-                  className="w-1/2 font-normal p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  placeholder="Position"
-                  value={member.position}
-                  onChange={(e) =>
-                    handleMemberChange(index, "position", e.target.value)
-                  }
-                  className="w-1/2 p-2 font-normal border border-gray-300 rounded"
-                />
-                {/* Trash Icon */}
-
-                <button
-                  type="button"
-                  onClick={() => removeMember(index)}
-                  className="p-3 items-center justify-center text-white bg-rose-500 hover:bg-red-900 rounded"
-                  style={{ height: "100%" }}
-                >
-                  <FaTrash icon="trash" className="text-xl" />
-                </button>
-              </div>
-            ))}
+            {console.log(members)}
+            {members.length > 0 ? (
+              members.map((member, index) => (
+                <div key={index} className="flex items-center space-x-4">
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={member.name}
+                    onChange={(e) =>
+                      handleMemberChange(index, "name", e.target.value)
+                    }
+                    className="w-1/2 font-normal p-2 border border-gray-300 rounded"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Position"
+                    value={member.role}
+                    onChange={(e) =>
+                      handleMemberChange(index, "role", e.target.value)
+                    }
+                    className="w-1/2 p-2 font-normal border border-gray-300 rounded"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeMember(index)}
+                    className="p-3 items-center justify-center text-white bg-rose-500 hover:bg-red-900 rounded"
+                    style={{ height: "100%" }}
+                  >
+                    <FaTrash icon="trash" className="text-xl" />
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p>No members added yet. Click "Add Member" to start.</p> // Display a message if no members exist
+            )}
             <button
               type="button"
               onClick={addMember}

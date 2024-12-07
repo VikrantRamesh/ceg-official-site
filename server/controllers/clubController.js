@@ -46,8 +46,6 @@ exports.getClub = async (req, res) => {
             return res.status(200).json(result); 
         } 
         else {
-            
-            console.log(req.session);
             const result = await clubModel.getClubByUserId(req.session.user.uid);
             return res.status(200).json(result);
         }

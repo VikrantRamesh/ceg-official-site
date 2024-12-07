@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ClubSignin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const ClubSignin = () => {
           
           //redirect after successful login
           if(response.status === 200){
-            alert("redirect"); //replace with redirect logic
+            navigate('/admin_club_page/');            
           }
 
           setUsername("");
