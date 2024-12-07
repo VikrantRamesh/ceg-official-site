@@ -40,6 +40,9 @@ app.use('/api/admin', adminRoutes); // Use admin routes
 app.use('/api/club', clubRoutes); // Use club routes
 app.use('/api/event', eventRoutes); // Use event routes
 
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
 

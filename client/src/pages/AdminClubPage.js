@@ -126,19 +126,36 @@ const AdminPage = () => {
   // Submission handler
   const handleSubmit = async () => {
     try {
-      const payload = {
-        clubDetails,
-        members,
-        events,
-        socials,
-      };
-      await axios.put("/api/admin/update-club-details", payload);
+      // Create a FormData object to handle both the form data and the file upload
+      const formData = new FormData();
+  
+      // Append club details
+      formData.append("description", clubDetails.description);
+      formData.append("socials", JSON.stringify(socials));
+      formData.append("website", socials.website);
+      formData.append("members", JSON.stringify(members));
+  
+      // If there's a logo image, append it to the formData
+      if (clubDetails.image) {
+        const fileInput = fileInputRef.current.files[0];
+        formData.append("logo", fileInput); // This is where the file is added
+      }
+  
+      // Send the form data to the backend via POST request
+      await axios.post(`${process.env.REACT_APP_API_URL}/club/update-info`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Important for handling file uploads
+        },
+        withCredentials: true, 
+      });
+  
       alert("Updates submitted successfully!");
     } catch (error) {
       console.error("Error submitting updates: ", error);
       alert("Failed to submit updates. Please try again.");
     }
   };
+  
 
   return (
     <div className="p-10 bg-gray-100 min-h-screen">
