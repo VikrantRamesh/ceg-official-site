@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import {
   FaGlobe,
   FaInstagram,
@@ -33,6 +34,8 @@ const AdminPage = () => {
     linkedin: "",
     youtube: "",
   });
+  
+  const navigate = useNavigate();
 
   const fileInputRef = useRef(null);
 
@@ -65,7 +68,11 @@ const AdminPage = () => {
           youtube: parsedSocials.youtube || "",
         });
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        if (error.response && error.response.status === 403) {
+          navigate("/club/"); // Redirect on 403 error (not logged in)
+        } else {
+          console.error("Error fetching data: ", error);
+        }
       }
     };
 

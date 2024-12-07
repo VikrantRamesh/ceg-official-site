@@ -7,7 +7,7 @@ exports.updateClub = async (req, res) => {
 
 
     // Assuming the file is uploaded to 'public/uploads' inside the project
-    const logo_path = req.files['logo'] ? '\\'+req.files['logo'][0].path.replace(/^.*client[\\\/]public[\\\/]/, '') : null;
+    const logo_path = req.files['logo'] ? '\\' + req.files['logo'][0].path.replace(/^.*client[\\\/]public[\\\/]/, '') : null;
 
     // Prepare the club data for update
     const clubData = {
@@ -47,8 +47,13 @@ exports.getClub = async (req, res) => {
             return res.status(200).json(result);
         }
         else {
-            const result = await clubModel.getClubByUserId(req.session.user.uid);
-            return res.status(200).json(result);
+            if (req.session.user) {//if logged in
+                const result = await clubModel.getClubByUserId(req.session.user.uid);
+                return res.status(200).json(result);
+            }
+            else{
+                return res.status(403).json({ message: 'Access denied. Clubs only.' });
+            }
         }
     } catch (err) {
         console.error(err);
