@@ -34,7 +34,7 @@ exports.getClubByClubId = async (clubid) => {
 };
 
 // get all clubs
-exports.getAllClubs = async () =>{
+exports.getAllClubs = async () => {
   try {
     const results = await pool.query('SELECT id, clubname as name, emoji as icon FROM clubs');
     return results;
@@ -46,19 +46,28 @@ exports.getAllClubs = async () =>{
 
 // update club info
 exports.updateClub = async (userId, clubData) => {
-  const { description, socials, logo_path, banner_path, website, members } = clubData;
+  const { description, socials, logo_path, website, members } = clubData;
+  let result;
 
   try {
-      const result = await pool.query(
-          `UPDATE clubs 
-           SET description = ?, socials = ?, logo_path = ?, banner_path = ?, website = ?, members = ? 
+    if (logo_path !== null) //include logo path if uploaded
+      result = await pool.query(
+        `UPDATE clubs 
+           SET description = ?, socials = ?, logo_path = ?, website = ?, members = ? 
            WHERE userid = ?`,
-          [description, JSON.stringify(socials), logo_path, banner_path, website, JSON.stringify(members), userId]
+        [description, JSON.stringify(socials), logo_path, website, JSON.stringify(members), userId]
+      );
+    else  // dont include logo path if it is null
+      result = await pool.query(
+        `UPDATE clubs 
+          SET description = ?, socials = ?, website = ?, members = ? 
+          WHERE userid = ?`,
+        [description, JSON.stringify(socials), website, JSON.stringify(members), userId]
       );
 
-      return result; // Return the result to the controller
+    return result; // Return the result to the controller
   } catch (err) {
-      console.error('Error updating club: ', err);
-      throw err; // Throw error to be handled in the controller
+    console.error('Error updating club: ', err);
+    throw err; // Throw error to be handled in the controller
   }
 };
