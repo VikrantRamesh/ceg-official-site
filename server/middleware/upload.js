@@ -4,11 +4,11 @@ const path = require('path');
 // Configure storage for Multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/'); // Directory to store uploaded files
+        cb(null, 'client/public/uploads'); // Directory to store uploaded files
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname); // Get file extension
-        const username = req.session.username; // Get user name
+        const username = req.session.user.username; // Get user name
         cb(null, `${username}-${file.fieldname}${ext}`); // Unique filename for a user and upload type
     }
 });

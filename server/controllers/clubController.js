@@ -1,13 +1,13 @@
 const clubModel = require('../models/clubModel');
-
+const path = require('path');
 
 //controller to update club info
 exports.updateClub = async (req, res) => {
     const { description, socials, website, members } = req.body;
 
-    // Process uploaded files
-    const logo_path = req.files['logo'] ? req.files['logo'][0].path : null;
-    const banner_path = req.files['banner'] ? req.files['banner'][0].path : null;
+
+    // Assuming the file is uploaded to 'public/uploads' inside the project
+    const logo_path = req.files['logo'] ? '\\' + req.files['logo'][0].path.replace(/^.*client[\\\/]public[\\\/]/, '') : null;
 
     // Prepare the club data for update
     const clubData = {
@@ -16,7 +16,6 @@ exports.updateClub = async (req, res) => {
         website,
         members: JSON.parse(members),
         logo_path,
-        banner_path,
     };
 
     try {
@@ -30,23 +29,34 @@ exports.updateClub = async (req, res) => {
 
 //get list of clubs
 exports.getAllClubs = async (req, res) => {
-    try{
-        const results =  await clubModel.getAllClubs();
+    try {
+        const results = await clubModel.getAllClubs();
         return res.status(200).json(results[0]);
-    } catch (err){
+    } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Error fetching records' });
     }
 }
-  
+
 //get club details for specific id
 exports.getClub = async (req, res) => {
     const { clubid } = req.params; //get clubid
     try {
-        const result = await clubModel.getClubByClubId(clubid);
-        return res.status(200).json(result);  
+        if (clubid != -1) {
+            const result = await clubModel.getClubByClubId(clubid);
+            return res.status(200).json(result);
+        }
+        else {
+            if (req.session.user) {//if logged in
+                const result = await clubModel.getClubByUserId(req.session.user.uid);
+                return res.status(200).json(result);
+            }
+            else{
+                return res.status(403).json({ message: 'Access denied. Clubs only.' });
+            }
+        }
     } catch (err) {
         console.error(err);
-        return res.status(500).json({ message: 'Error fetching record '});
+        return res.status(500).json({ message: 'Error fetching record ' });
     }
 }

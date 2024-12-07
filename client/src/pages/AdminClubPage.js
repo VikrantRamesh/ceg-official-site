@@ -1,4 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import {
   FaGlobe,
   FaInstagram,
@@ -11,20 +13,17 @@ import {
 
 const AdminPage = () => {
   const [clubDetails, setClubDetails] = useState({
-    name: "ACM-CEG",
-    description:
-      "The ACM-CEG Student Chapter, initiated in 2004, aims to instill an unwavering enthusiasm for computer science in students. The club provides a plethora of networking opportunities and helps to seek advice from the top experts in the field. The club has been steadily working to inculcate an unalloyed interest in Computer Science in students and consequently, stimulating the advancement of computer science as a whole.",
+    name: "",
+    description: "",
     image: null,
   });
 
   const [members, setMembers] = useState([
-    { name: "Ansh Bomb", position: "President" },
-    { name: "Shiyam Ganesh T", position: "Vice President" },
+    { name: "", role: "" },
   ]);
 
   const [events, setEvents] = useState([
-    { description: "Prodigy event description.", link: "" },
-    { description: "CodHer event description.", link: "" },
+    { description: "", link: "" },
   ]);
 
   const [socials, setSocials] = useState({
@@ -35,10 +34,51 @@ const AdminPage = () => {
     linkedin: "",
     youtube: "",
   });
+  
+  const navigate = useNavigate();
 
   const fileInputRef = useRef(null);
 
   // Handlers for club details
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/club/club-info/-1`, { withCredentials: true });
+
+        const fetchedClubDetails = {
+          image: response.data.logo_path,
+          name: response.data.clubname,
+          description: response.data.description,
+        }
+
+        setClubDetails(fetchedClubDetails || {});
+        setEvents(response.data.events || []);
+
+        // Parse the social media string and format it
+        const parsedMembers = JSON.parse(response.data.members);
+        setMembers( parsedMembers || [{ name: "", role: "" }]);
+
+        const parsedSocials = response.data.socials ? JSON.parse(response.data.socials) : {};
+        setSocials({
+          website: response.data.website || "",
+          instagram: parsedSocials.insta || "",
+          facebook: parsedSocials.facebook || "",
+          twitter: parsedSocials.twitter || "",
+          linkedin: parsedSocials.linkedin || "",
+          youtube: parsedSocials.youtube || "",
+        });
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          navigate("/club/"); // Redirect on 403 error (not logged in)
+        } else {
+          console.error("Error fetching data: ", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleDetailsChange = (e) => {
     const { name, value } = e.target;
     setClubDetails({ ...clubDetails, [name]: value });
@@ -65,7 +105,7 @@ const AdminPage = () => {
     setMembers(updatedMembers);
   };
 
-  const addMember = () => setMembers([...members, { name: "", position: "" }]);
+  const addMember = () => setMembers([...members, { name: "", role: "" }]);
 
   const removeMember = (index) => {
     setMembers(members.filter((_, i) => i !== index));
@@ -90,14 +130,39 @@ const AdminPage = () => {
     setSocials({ ...socials, [name]: value });
   };
 
-  // Submission handler (mock functionality)
-  const handleSubmit = () => {
-    console.log("Updated Club Details: ", clubDetails);
-    console.log("Updated Members: ", members);
-    console.log("Updated Events: ", events);
-    console.log("Updated Socials: ", socials);
-    alert("Updates submitted successfully!");
+  // Submission handler
+  const handleSubmit = async () => {
+    try {
+      // Create a FormData object to handle both the form data and the file upload
+      const formData = new FormData();
+  
+      // Append club details
+      formData.append("description", clubDetails.description);
+      formData.append("socials", JSON.stringify(socials));
+      formData.append("website", socials.website);
+      formData.append("members", JSON.stringify(members));
+  
+      // If there's a logo image, append it to the formData
+      if (clubDetails.image) {
+        const fileInput = fileInputRef.current.files[0];
+        formData.append("logo", fileInput); // This is where the file is added
+      }
+  
+      // Send the form data to the backend via POST request
+      await axios.post(`${process.env.REACT_APP_API_URL}/club/update-info`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Important for handling file uploads
+        },
+        withCredentials: true, 
+      });
+  
+      alert("Updates submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting updates: ", error);
+      alert("Failed to submit updates. Please try again.");
+    }
   };
+  
 
   return (
     <div className="p-10 bg-gray-100 min-h-screen">
@@ -167,38 +232,41 @@ const AdminPage = () => {
         <div>
           <h2 className="text-2xl mb-4">Club Members</h2>
           <div className="space-y-4">
-            {members.map((member, index) => (
-              <div key={index} className="flex items-center space-x-4">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={member.name}
-                  onChange={(e) =>
-                    handleMemberChange(index, "name", e.target.value)
-                  }
-                  className="w-1/2 font-normal p-2 border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  placeholder="Position"
-                  value={member.position}
-                  onChange={(e) =>
-                    handleMemberChange(index, "position", e.target.value)
-                  }
-                  className="w-1/2 p-2 font-normal border border-gray-300 rounded"
-                />
-                {/* Trash Icon */}
-
-                <button
-                  type="button"
-                  onClick={() => removeMember(index)}
-                  className="p-3 items-center justify-center text-white bg-rose-500 hover:bg-red-900 rounded"
-                  style={{ height: "100%" }}
-                >
-                  <FaTrash icon="trash" className="text-xl" />
-                </button>
-              </div>
-            ))}
+            {console.log(members)}
+            {members.length > 0 ? (
+              members.map((member, index) => (
+                <div key={index} className="flex items-center space-x-4">
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={member.name}
+                    onChange={(e) =>
+                      handleMemberChange(index, "name", e.target.value)
+                    }
+                    className="w-1/2 font-normal p-2 border border-gray-300 rounded"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Position"
+                    value={member.role}
+                    onChange={(e) =>
+                      handleMemberChange(index, "role", e.target.value)
+                    }
+                    className="w-1/2 p-2 font-normal border border-gray-300 rounded"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeMember(index)}
+                    className="p-3 items-center justify-center text-white bg-rose-500 hover:bg-red-900 rounded"
+                    style={{ height: "100%" }}
+                  >
+                    <FaTrash icon="trash" className="text-xl" />
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p>No members added yet. Click "Add Member" to start.</p> // Display a message if no members exist
+            )}
             <button
               type="button"
               onClick={addMember}

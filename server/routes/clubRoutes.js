@@ -5,7 +5,7 @@ const clubMiddleware = require('../middleware/club');
 const upload = require('../middleware/upload');
 
 // Route for updating club information
-router.post('/update-info', clubMiddleware, upload.fields([{ name: 'logo' }, { name: 'banner' }]), clubController.updateClub);
+router.post('/update-info', clubMiddleware, upload.fields([{ name: 'logo' }]), clubController.updateClub);
 
 // Route to get list of all clubs
 router.get('/all-clubs', clubController.getAllClubs);
