@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import CEGLogo from "../assets/images/CEG_logo.png";
 import AU_logo from "../assets/images/AU_logo.png";
 import "../styles/NavBar.css";
@@ -81,6 +82,7 @@ const CollapsibleMenu = ({
   label,
   tabName,
   items,
+  link,
   currentTab,
   handleTabClick,
   setIsMobileMenuOpen,
@@ -93,7 +95,13 @@ const CollapsibleMenu = ({
         className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold ${
           currentTab === tabName ? "text-red-800 " : ""
         }`}
-        onClick={() => handleTabClick(tabName)}
+        onClick={() => {
+          if (link) {
+            window.location.href = link;
+          } else {
+            handleTabClick(tabName);
+          }
+        }}
       >
         {label}
       </button>
@@ -120,7 +128,30 @@ const CollapsibleMenu = ({
   );
 };
 
-const Navbar = ({ currentTab, setCurrentTab }) => {
+const Navbar = () => {
+  const location = useLocation();
+  const [currentTab, setCurrentTab] = useState("home");
+
+  // Define URL-to-tab mapping
+  const urlToTabMap = {
+    "/": "home",
+    "/club": "club",
+    "/club_home": "student-activity",
+    "/club_landing": "student-activity",
+    "/admin": "club_details",
+    "/events": "student-activity",
+    "/courses": "academics",
+    "/admin/events_update": "events_update",
+    "/admin/admin_profile": "admin_profile",
+  };
+
+  // Update current tab based on URL
+  useEffect(() => {
+    // Find the matching tab from the map
+    const newCurrentTab = urlToTabMap[location.pathname] || "home";
+    setCurrentTab(newCurrentTab);
+    console.log(location.pathname, newCurrentTab);
+  }, [location]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
 
@@ -311,6 +342,29 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
       items: null,
     },
   ];
+  const adminMenuItems = [
+    {
+      label: "Club Details",
+      tabName: "club_details",
+      link: "/admin",
+      items: null,
+    },
+    {
+      label: "Updates & Events",
+      tabName: "events_update",
+      link: "/admin/events_update",
+      items: null,
+    },
+    {
+      label: "Admin Profile",
+      tabName: "admin_profile",
+      link: "/admin/admin_profile",
+      items: null,
+    },
+  ];
+
+  const isAdminPage = location.pathname.startsWith("/admin");
+  const itemsToRender = isAdminPage ? adminMenuItems : menuItems;
 
   return (
     <>
@@ -358,20 +412,24 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
 
       <nav>
         <div className="hidden lg:flex items-center p-1 shadow-md justify-evenly  bg-white border-t-2 border-gray-300 pt-2 pb-2">
-          <a
-            href="/"
-            className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold hover:border-b-4 hover:border-red-800 duration-100 ${
-              currentTab === "home"
-                ? "text-red-800 font-bold border-b-4 border-red-800"
-                : ""
-            }`}
-            onClick={() => {
-              handleTabClick("home");
-            }}
-          >
-            Home
-          </a>
-          {menuItems.map((menu) => (
+          {!isAdminPage ? (
+            <a
+              href="/"
+              className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold hover:border-b-4 hover:border-red-800 duration-100 ${
+                currentTab === "home"
+                  ? "text-red-800 font-bold border-b-4 border-red-800"
+                  : ""
+              }`}
+              onClick={() => {
+                handleTabClick("home");
+              }}
+            >
+              Home
+            </a>
+          ) : (
+            <></>
+          )}
+          {itemsToRender.map((menu) => (
             <DropdownMenu
               key={menu.tabName}
               label={menu.label}
@@ -398,22 +456,26 @@ const Navbar = ({ currentTab, setCurrentTab }) => {
       {isMobileMenuOpen && (
         <div className="top-full left-0 right-0 bg-slate-100 shadow-lg">
           <div className="flex flex-col space-y-2 p-4 items-baseline">
-            <a
-              href="#"
-              className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold ${
-                currentTab === "home" ? "text-red-800 " : ""
-              }`}
-              onClick={() => handleTabClick("home")}
-            >
-              Home
-            </a>
-
-            {menuItems.map(({ label, tabName, items }) => (
+            {!isAdminPage ? (
+              <a
+                href="#"
+                className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold ${
+                  currentTab === "home" ? "text-red-800 " : ""
+                }`}
+                onClick={() => handleTabClick("home")}
+              >
+                Home
+              </a>
+            ) : (
+              <></>
+            )}
+            {itemsToRender.map(({ label, tabName, items, link }) => (
               <CollapsibleMenu
                 key={tabName}
                 label={label}
                 tabName={tabName}
                 items={items}
+                link={link}
                 currentTab={currentTab}
                 handleTabClick={handleTabClick}
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
