@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Updates from "./components/Updates";
 import Statistics from "./components/Statistics";
@@ -16,21 +21,23 @@ import CollegeFooter from "./components/Footer";
 import AdminPage from "./pages/AdminClubPage";
 import Events from "./pages/Events";
 import CoursesOffered from "./pages/Courses";
+import EventsPage from "./pages/EventsUpdatePage";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
-  const [currentTab, setCurrentTab] = useState("home");
-
   return (
     <Router>
       <div className="App">
-        <NavBar currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        <NavBar />
         <Routes>
           <Route path="/club/*" element={<Club />} />
           <Route path="/club_home/*" element={<ClubHomePage />} />
           <Route path="/club_landing/:id" element={<ClubPage />} />
-          <Route path="/admin_club_page/*" element={<AdminPage />} />
+          <Route path="/admin/*" element={<AdminPage />} />
           <Route path="/events" element={<Events />} />
           <Route path="/courses" element={<CoursesOffered />} />
+          <Route path="/admin/events_update" element={<EventsPage />} />
+          <Route path="/admin/admin_profile" element={<UserProfile />} />
           <Route
             path="/"
             element={
