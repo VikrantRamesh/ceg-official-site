@@ -21,6 +21,7 @@ body {
   justify-content: center;
   gap: 20px;
   margin-bottom: 20px;
+  flex-wrap: wrap; /* Allows filters to wrap on smaller screens */
 }
 
 .filter-dropdown {
@@ -28,11 +29,13 @@ body {
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 100%; /* Full-width on smaller screens */
+  max-width: 300px; /* Restricts width on larger screens */
 }
 
 .course-list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }
 
@@ -64,4 +67,64 @@ ul {
 ul li {
   font-size: 1rem;
   margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .filter-dropdown {
+    max-width: 100%; /* Ensure dropdowns take full width */
+  }
+
+  .course-list {
+    grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+
+  .course-item {
+    padding: 15px; /* Reduce padding on smaller screens */
+  }
+
+  .department-title {
+    font-size: 1.3rem;
+  }
+
+  .course-section h3 {
+    font-size: 1rem;
+  }
+
+  ul li {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .title {
+    font-size: 2.3rem;
+  }
+
+  .filter-container {
+    gap: 15px; /* Adjust spacing for medium screens */
+  }
+
+  .course-list {
+    grid-template-columns: 1fr 1fr; /* Two columns for medium screens */
+  }
+
+  .course-item {
+    padding: 18px;
+  }
+
+  .department-title {
+    font-size: 1.4rem;
+  }
 }
