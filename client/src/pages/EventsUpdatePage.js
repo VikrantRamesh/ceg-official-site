@@ -69,6 +69,16 @@ const EventsPage = () => {
     }
   };
 
+  const updateEvent = (index) => {
+    const updatedEvents = [...events];
+    // updatedEvents[index] is the event to be updated
+  };
+
+  const deleteEvent = (index) => {
+    const updatedEvents = [...events];
+    // updatedEvents[index] is the event to be deleted
+  };
+
   const toggleEditMode = (index) => {
     const updatedEvents = [...events];
     updatedEvents[index].isEditing = !updatedEvents[index].isEditing;
@@ -99,10 +109,13 @@ const EventsPage = () => {
                     className="md:col-span-11 col-span-9 font-normal p-2 border border-gray-300 rounded"
                   ></textarea>
 
-                  {/* Edit Button */}
+                  {/* check Button */}
                   <button
                     type="button"
-                    onClick={() => toggleEditMode(index)}
+                    onClick={() => {
+                      toggleEditMode(index);
+                      updateEvent(index);
+                    }}
                     className="row-span-1 col-span-3 md:col-span-1 flex items-center justify-center text-white bg-emerald-500 hover:bg-green-700 rounded"
                     style={{ height: "100%" }}
                   >
@@ -122,7 +135,10 @@ const EventsPage = () => {
                   {/* Trash Icon */}
                   <button
                     type="button"
-                    onClick={() => removeEvent(index)}
+                    onClick={() => {
+                      removeEvent(index);
+                      deleteEvent(index);
+                    }}
                     className="row-span-1  col-span-3 md:col-span-1 flex items-center justify-center text-white bg-rose-500 hover:bg-red-900 rounded"
                     style={{ height: "100%" }}
                   >
@@ -146,7 +162,9 @@ const EventsPage = () => {
                     <div className="row-span-3 col-span-12 grid-cols-2 grid gap-5 md:col-span-2">
                       <button
                         type="button"
-                        onClick={() => toggleEditMode(index)}
+                        onClick={() => {
+                          toggleEditMode(index);
+                        }}
                         className="col-span-1 justify-center justify-items-center justify-self-stretch text-white bg-blue-500 hover:bg-blue-900 rounded px-auto py-2"
                         style={{ height: "100%" }}
                       >
@@ -156,7 +174,10 @@ const EventsPage = () => {
                       {/* Trash Icon */}
                       <button
                         type="button"
-                        onClick={() => removeEvent(index)}
+                        onClick={() => {
+                          removeEvent(index);
+                          deleteEvent(index);
+                        }}
                         className="col-span-1  justify-center justify-items-center text-white bg-rose-500 hover:bg-red-900 rounded px-auto py-2"
                         style={{ height: "100%" }}
                       >
@@ -188,7 +209,9 @@ const EventsPage = () => {
                     <div className="row-span-2 col-span-12 grid-cols-2 grid gap-5 md:col-span-2">
                       <button
                         type="button"
-                        onClick={() => toggleEditMode(index)}
+                        onClick={() => {
+                          toggleEditMode(index);
+                        }}
                         className="col-span-1 justify-center justify-items-center justify-self-stretch text-white bg-blue-500 hover:bg-blue-900 rounded px-auto py-2"
                         style={{ height: "100%" }}
                       >
@@ -198,7 +221,10 @@ const EventsPage = () => {
                       {/* Trash Icon */}
                       <button
                         type="button"
-                        onClick={() => removeEvent(index)}
+                        onClick={() => {
+                          removeEvent(index);
+                          deleteEvent(index);
+                        }}
                         className="col-span-1  justify-center justify-items-center text-white bg-rose-500 hover:bg-red-900 rounded px-auto py-2"
                         style={{ height: "100%" }}
                       >
@@ -224,16 +250,6 @@ const EventsPage = () => {
         >
           Add Event
         </button>
-
-        <div className="text-right mt-4">
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="bg-blue-600 text-white px-4 py-2 rounded"
-          >
-            Save Changes
-          </button>
-        </div>
       </form>
     </div>
   );
