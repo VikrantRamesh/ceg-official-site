@@ -1,5 +1,8 @@
 import React from "react";
 import "../styles/Events.css";
+import technofes from "../assets/images/Techofes.jpg";
+import agni from "../assets/images/agni.jpg";
+// import kurukshetra from "../assets/images/Kurukshetra.jpg";
 
 const Events = () => {
   const events = [
@@ -9,7 +12,7 @@ const Events = () => {
       description:
         "Agni is an electrifying intra-college cultural extravaganza, packed with vibrant workshops and pro-nights, igniting the spark of creativity among students.",
       date: "NOV 8-10, 2024",
-      image: "../assets/images/agni.jpg",
+      image: agni,
     },
     {
       id: 2,
@@ -25,7 +28,7 @@ const Events = () => {
       description:
         "Techofes is South India's largest cultural festival featuring thrilling pro-nights, dance competitions, and artistic showcases, all under the stars.",
       date: "February 10, 2024",
-      image: "../assets/images/Techofes.jpg",
+      image: technofes,
     },
     {
       id: 4,
