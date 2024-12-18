@@ -45,7 +45,6 @@ exports.upsertEvent = async (req, res) => {
 // Controller for deleting an event
 exports.deleteEvent = async (req, res) => {
     const { id } = req.params;
-    console.log(req.session.user);
     try {
         const result = await eventModel.deleteEventById(id, req.session.user.uid);
         if (result.affectedRows === 0) {
