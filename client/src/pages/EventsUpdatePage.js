@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 const EventsPage = () => {
-  const [events, setEvents] = useState([
-    {
-      title: "default1 default1 default1 default1 default1 default1",
-      description: "",
-      link: "http://localhost:3000/admin/events_update",
-    },
-    {
-      title: "default2",
-      description: "",
-      link: "http://localhost:3000/admin/events_update",
-    },
-  ]);
+  const [events, setEvents] = useState([]);
 
   const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
@@ -27,14 +17,18 @@ const EventsPage = () => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/club/events`,
+          `${process.env.REACT_APP_API_URL}/event/all-events/-1`,
           {
             withCredentials: true,
           }
         );
         setEvents(response.data || []);
       } catch (error) {
-        console.error("Error fetching events: ", error);
+        if (error.response && error.response.status === 403) {
+          navigate("/club/");
+        } else {
+          console.error("Error fetching events: ", error);
+        }
       }
     };
 
@@ -50,33 +44,56 @@ const EventsPage = () => {
   const addEvent = () =>
     setEvents([
       ...events,
-      { title: "", description: "", link: "", isEditing: true },
+      { id: "", title: "", description: "", link: "", isEditing: true },
     ]);
   const removeEvent = (index) =>
     setEvents(events.filter((_, i) => i !== index));
 
-  const handleSubmit = async () => {
+  const updateEvent = async (index) => {
+    const updatedEvents = [...events];
+    const eventToUpdate = updatedEvents[index]; // Get the event to be updated
+
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/club/update-events`,
-        { events },
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_URL}/event/upsert-event`, 
+        {
+          id: eventToUpdate.id,
+          title: eventToUpdate.title,
+          description: eventToUpdate.description,
+          link: eventToUpdate.link
+        },
         { withCredentials: true }
       );
-      alert("Events updated successfully!");
+
+      console.log('Event updated successfully:', response.data);
+
+      // If the response contains an id, update the event at the specified index
+      if (response.data.id) {
+        updatedEvents[index].id = response.data.id;
+      }
+
     } catch (error) {
-      console.error("Error updating events: ", error);
-      alert("Failed to update events.");
+      console.error('Error updating event:', error.response ? error.response.data : error.message);
     }
-  };
+};
 
-  const updateEvent = (index) => {
-    const updatedEvents = [...events];
-    // updatedEvents[index] is the event to be updated
-  };
 
-  const deleteEvent = (index) => {
+  const deleteEvent = async (index) => {
     const updatedEvents = [...events];
-    // updatedEvents[index] is the event to be deleted
+    const eventId = updatedEvents[index].id;
+    if (eventId) {
+      try {
+        const response = await axios.delete(
+          `${process.env.REACT_APP_API_URL}/event/delete-event/${eventId}`, // Delete endpoint with event ID
+          {
+            withCredentials: true, // Include cookies if needed
+          }
+        );
+        console.log('Event deleted successfully:', response.data);
+      } catch (error) {
+        console.error('Error deleting event:', error.response ? error.response.data : error.message);
+      }
+    }
   };
 
   const toggleEditMode = (index) => {

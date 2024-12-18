@@ -32,7 +32,7 @@ const ClubSignin = () => {
           
           //redirect after successful login
           if(response.status === 200){
-            navigate('/admin_club_page/');            
+            navigate('/admin');            
           }
 
           setUsername("");

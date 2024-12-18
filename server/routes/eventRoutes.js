@@ -5,12 +5,12 @@ const clubMiddleware = require('../middleware/club');
 
 
 // Route to get list of all events of logged in club
-router.get('/all-events/:clubid', clubMiddleware, eventController.getAllEvents);
+router.get('/all-events/:clubid', eventController.getAllEvents);
 
 // Route to get details of specific club
-router.post('/add-event', clubMiddleware, eventController.insertNewEvent);
+router.put('/upsert-event/', clubMiddleware, eventController.upsertEvent);
 
-// Route to update existing event
-router.post('/update-event', clubMiddleware, eventController.updateEvent);
+// Route to delete a specific event
+router.delete('/delete-event/:id', clubMiddleware, eventController.deleteEvent);
 
 module.exports = router;
