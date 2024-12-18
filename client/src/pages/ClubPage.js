@@ -6,13 +6,14 @@ const ClubPage = () => {
   const { id } = useParams(); // Extract the dynamic part of the URL
   const [clubDetails, setClubDetails] = useState(null); // State to store club details
   const [memberDetails, setMemberDetails] = useState([]); // Default to empty array if members data is empty
+  const [events, setEvents] = useState([]); // State to store events data
   const [error, setError] = useState(null); // State to handle errors
 
   useEffect(() => {
     // Function to fetch club details
     const fetchClubDetails = async () => {
       try {
-        const response = await axios.get(`/api/club/club-info/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/club/club-info/${id}`);
         setClubDetails(response.data); // Store the data in state
         if (response.data.members) {
           // Only parse if members data exists
@@ -27,9 +28,18 @@ const ClubPage = () => {
   }, [id]); // Run this effect whenever `id` changes
 
   useEffect(() => {
-    // Log member details after they are updated
-    console.log(memberDetails);
-  }, [memberDetails]); // Runs after memberDetails state is updated
+    // Function to fetch events for the club
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/event/all-events/${id}`);
+        setEvents(response.data); // Store the events in state
+      } catch (err) {
+        console.error("Error fetching events:", err.message);
+        setError("Failed to fetch events. Please try again later.");
+      }
+    };
+    fetchEvents();
+  }, [id]); // Run this effect whenever `id` changes
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -53,7 +63,7 @@ const ClubPage = () => {
           >
             <button
               type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-bold rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-bold rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Website
             </button>
@@ -66,7 +76,7 @@ const ClubPage = () => {
           >
             <button
               type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-bold rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-bold rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Socials
             </button>
@@ -75,10 +85,8 @@ const ClubPage = () => {
 
         {/* Club Details */}
         <div style={styles.details}>
-          <h2 className="text-3xl my-4">ACM-CEG</h2>
-          <p className="font-normal">
-            {clubDetails.description}
-          </p>
+          <h2 className="text-3xl my-4">{clubDetails.clubname}</h2>
+          <p className="font-normal">{clubDetails.description}</p>
 
           {/* Members Section */}
           <div style={styles.members}>
@@ -96,24 +104,29 @@ const ClubPage = () => {
               )}
             </div>
           </div>
-          
 
           {/* Events Section */}
           <div style={styles.events}>
             <h3 className="font-semibold text-xl mb-2">Events & Updates</h3>
             <ul className="space-y-1 list-disc list-inside">
-              <li className="font-normal pt-1">
-                Prodigy, an annual state-level technical event organized by the
-                ACM-CEG chapter at Anna University, is a pioneering initiative
-                designed exclusively for students in grades 9-12.
-              </li>
-              <li className="font-normal pt-1">
-                Empowerment takes center stage at "CodHer," our exclusive
-                women-only hackathon designed to inspire and motivate female
-                developers to actively engage in the dynamic world of
-                hackathons. Providing a dedicated platform for female talent,
-                CodHer is a showcase of skills, innovation, and collaboration.
-              </li>
+              {events.length > 0 ? (
+                events.map((event, index) => (
+                  <li className="font-normal pt-1" key={index}>
+                    {/* Event title as a clickable link */}
+                    <a
+                      href={event.link} // Link to the event
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: '#1a73e8', textDecoration: 'none' }}
+                    >
+                      {event.title}
+                    </a>
+                    {/* : {event.description} */}
+                  </li>
+                ))
+              ) : (
+                <p>No events available.</p>
+              )}
             </ul>
           </div>
         </div>
@@ -157,7 +170,7 @@ const styles = {
     borderRadius: "10px",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   },
-  members: { margin: "20px 10px", marginTop: "30px" }, // Added margin to the entire section
+  members: { margin: "20px 10px", marginTop: "30px" },
   memberList: { display: "flex", gap: "20px", marginTop: "10px" },
   member: {
     backgroundColor: "#f4f4f4",
@@ -190,8 +203,5 @@ const styles = {
     maxHeight: "400px",
   },
 };
-
-// Adding hover effect dynamically for members
-styles.member[":hover"] = { transform: "scale(1.05)" };
 
 export default ClubPage;

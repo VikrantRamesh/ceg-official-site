@@ -33,6 +33,9 @@ app.use(session({
   cookie: { secure: process.env.COOKIES_SECURE,  sameSite: 'Lax', httpOnly: true } // Set true if using HTTPS
 }));
 
+const keepUserLoggedIn = require('./middleware/keepUserLoggedIn');
+app.use(keepUserLoggedIn);
+
 // API Routes
 app.use('/api/landing', landingRoutes);  // Routes for fetching updates and statistics
 app.use('/api/auth', authRoutes); // Use auth routes
