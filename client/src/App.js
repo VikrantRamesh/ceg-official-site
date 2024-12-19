@@ -13,7 +13,7 @@ import VisionMission from "./components/VisionMission";
 import StudentActivity from "./components/StudentActivity";
 import DeanProfile from "./components/DeanProfile";
 import Facilities from "./components/Facilities"; // Import Facilities
-import au from "./assets/images/hexagon.jpg";
+import au from "./assets/images/hexagon.png";
 import Club from "./admin/pages/Club";
 import ClubPage from "./pages/ClubPage";
 import ClubHomePage from "./pages/ClubHomePage";
@@ -43,17 +43,18 @@ function App() {
             element={
               <>
                 <Updates />
-                <Statistics />
+                {/* <Statistics /> */}
+                <VisionMission />
                 <DeanProfile />
                 <div
                   style={{
+                    backgroundSize: "auto",
                     backgroundImage: `url(${au})`,
                     backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
+                    // backgroundSize: "cover",
                     backgroundBlendMode: "difference",
                   }}
                 >
-                  <VisionMission />
                   <Departments />
                 </div>
                 <StudentActivity />

@@ -15,7 +15,7 @@ const activities = [
   {
     title: "Youth Red Cross (YRC)",
     imageUrl: require("../assets/images/YRC.jpg"),
-    path: "/yrc",
+    path: "https://www.annauniv.edu/yrc/",
   },
   {
     title: "National Service Scheme (NSS)",
@@ -31,12 +31,7 @@ const activities = [
   {
     title: "Clubs and Socities",
     imageUrl: require("../assets/images/cs.png"),
-    path: "/clubsandsocieties",
-  },
-  {
-    title: "Sports Board",
-    imageUrl: require("../assets/images/NSO.jpeg"),
-    path: "/clubsandsocieties",
+    path: "/club_home",
   },
 ];
 

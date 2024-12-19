@@ -2,7 +2,9 @@ import React from "react";
 import "../styles/Events.css";
 import technofes from "../assets/images/Techofes.jpg";
 import agni from "../assets/images/agni.jpg";
-// import kurukshetra from "../assets/images/Kurukshetra.jpg";
+import kurukshetra from "../assets/images/kurukshetra.JPG";
+import Sangharsh from "../assets/images/sangarsh.jpg";
+import vyuhaa from "../assets/images/vyuhaa.JPG";
 
 const Events = () => {
   const events = [
@@ -20,7 +22,7 @@ const Events = () => {
       description:
         "Kurukshetra, the premier inter-college techno-management festival, attracts thousands of students with challenging quizzes, workshops, and mind-bending games.",
       date: "January 20, 2024",
-      image: "../assets/images/kurukshetra.jpg",
+      image: kurukshetra,
     },
     {
       id: 3,
@@ -36,7 +38,15 @@ const Events = () => {
       description:
         "Sangharsh is an annual musical fundraiser aimed at supporting social causes, blending talent and humanity for a greater impact.",
       date: "March 5, 2024",
-      image: "../assets/images/sangharsh.jpg",
+      image: Sangharsh,
+    },
+    {
+      id: 5,
+      title: "Vyuhaa",
+      description:
+        "Vyuhaa is a magnificent techno-management fest exclusively hosted for students of the University Department campuses of Anna University. instilling an incandescent fervor for technology among incoming college freshmen",
+      date: "October 5, 2024",
+      image: vyuhaa,
     },
   ];
 

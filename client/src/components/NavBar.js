@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import CEGLogo from "../assets/images/CEG_logo.png";
-import AU_logo from "../assets/images/AU_logo.png";
 import "../styles/NavBar.css";
 import { useNavigate } from "react-router-dom";
 import {
@@ -384,12 +383,6 @@ const Navbar = () => {
               Anna University, Chennai
             </span>
           </div>
-          <img
-            src={AU_logo}
-            alt="CEG Logo"
-            className="h-12 mr-6 ml-6 mt-3 mb-3"
-            style={{ height: "7vh" }}
-          />
         </div>
 
         {/* Social Icons for large screens */}
