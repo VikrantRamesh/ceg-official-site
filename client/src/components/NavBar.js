@@ -5,12 +5,26 @@ import "../styles/NavBar.css";
 import { useNavigate } from "react-router-dom";
 import {
   FaFacebook,
-  FaYoutube,
   FaInstagram,
-  FaTwitter,
+  Fatwitter,
   FaLinkedin,
   FaPhoneAlt,
 } from "react-icons/fa";
+
+const XIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 1200 1227"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+      fill="#991b1b"
+    />
+  </svg>
+);
 
 const DropdownMenu = ({
   label,
@@ -140,6 +154,7 @@ const Navbar = () => {
     "/admin": "club_details",
     "/events": "student-activity",
     "/courses": "academics",
+    "/departments": "academics",
     "/admin/events_update": "events_update",
     "/admin/admin_profile": "admin_profile",
   };
@@ -166,24 +181,24 @@ const Navbar = () => {
     setActiveDropdown(null);
   };
   const menuItems = [
-    {
-      label: "About Us",
-      tabName: "about",
-      items: [
-        { label: "Profile", link: "/about/profile" },
-        { label: "History", link: "/about/history" },
-        { label: "Mission & Vision", link: "/about/mission-vision" },
-      ],
-    },
+    // {
+    //   label: "About Us",
+    //   tabName: "about",
+    //   items: [
+    //     { label: "Profile", link: "/about/profile" },
+    //     { label: "History", link: "/about/history" },
+    //     { label: "Mission & Vision", link: "/about/mission-vision" },
+    //   ],
+    // },
     {
       label: "Academics & Admissions",
       tabName: "academics",
       items: [
         {
           label: "Center for Admissions (UG/PG)",
-          link: "/academics/admissions",
+          link: "https://cfa.annauniv.edu/cfa/",
         },
-        { label: "Departments", link: "/academics/departments" },
+        { label: "Departments", link: "/departments" },
         { label: "Courses Offered", link: "/courses" },
         { label: "Curriculum and syllabi", link: "/academics/curriculum" },
       ],
@@ -387,12 +402,37 @@ const Navbar = () => {
 
         {/* Social Icons for large screens */}
         <div className="hidden lg:flex items-center space-x-6 mr-8">
-          <FaFacebook className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          <FaYoutube className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          <FaInstagram className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          <FaTwitter className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          <FaLinkedin className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          <FaPhoneAlt className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <a
+            href="https://www.facebook.com/CegChennai/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaFacebook className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          </a>
+          <a
+            href="https://www.instagram.com/ceg_au/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagram className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          </a>
+          <a
+            href="https://x.com/cegguindy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <XIcon className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          </a>
+          <a
+            href="https://www.linkedin.com/school/college-of-engineering-guindy/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedin className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          </a>
+          <a href="tel:+91 044 2235 8491">
+            <FaPhoneAlt className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          </a>
         </div>
 
         {/* Mobile hamburger menu */}
@@ -477,12 +517,37 @@ const Navbar = () => {
 
             {/* Social Icons for mobile screens */}
             <div className="flex justify-center space-x-6 pt-4">
-              <FaFacebook className="text-red-800 text-2xl" />
-              <FaYoutube className="text-red-800 text-2xl" />
-              <FaInstagram className="text-red-800 text-2xl" />
-              <FaTwitter className="text-red-800 text-2xl" />
-              <FaLinkedin className="text-red-800 text-2xl" />
-              <FaPhoneAlt className="text-red-800 text-2xl" />
+              <a
+                href="https://www.facebook.com/CegChennai/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebook className="text-red-800 text-2xl" />
+              </a>
+              <a
+                href="https://www.instagram.com/ceg_au/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram className="text-red-800 text-2xl" />
+              </a>
+              <a
+                href="https://x.com/cegguindy"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <XIcon className="text-red-800 text-2xl" />
+              </a>
+              <a
+                href="https://www.linkedin.com/school/college-of-engineering-guindy/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedin className="text-red-800 text-2xl" />
+              </a>
+              <a href="tel:+1234567890">
+                <FaPhoneAlt className="text-red-800 text-2xl" />
+              </a>
             </div>
           </div>
         </div>

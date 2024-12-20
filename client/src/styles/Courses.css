@@ -9,7 +9,7 @@ body {
   margin: auto;
 }
 
-.title {
+.course-title {
   text-align: center;
   font-size: 2.5rem;
   color: #b22222;
@@ -126,5 +126,73 @@ ul li {
 
   .department-title {
     font-size: 1.4rem;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .filter-dropdown {
+    max-width: 100%; /* Ensure dropdowns take full width */
+  }
+
+  .departments-list {
+    grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+
+  .department-item {
+    padding: 15px; /* Reduce padding on smaller screens */
+  }
+
+  .faculty-title {
+    font-size: 1.3rem;
+  }
+
+  .section h3 {
+    font-size: 1rem;
+  }
+
+  ul li {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .title {
+    font-size: 2.3rem;
+  }
+
+  .filter-container {
+    gap: 15px; /* Adjust spacing for medium screens */
+  }
+
+  .departments-list {
+    grid-template-columns: 1fr 1fr; /* Two columns for medium screens */
+  }
+
+  .department-item {
+    padding: 18px;
+  }
+
+  .faculty-title {
+    font-size: 1.4rem;
+  }
+
+  .section h3 {
+    font-size: 1.1rem;
+  }
+
+  ul li {
+    font-size: 1rem;
   }
 }

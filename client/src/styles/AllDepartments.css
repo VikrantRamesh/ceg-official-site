@@ -1,0 +1,114 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.header-image {
+  width: 100%;
+  height: 40vh; /* Adjust the height of the image */
+  background-image: url("../assets/images/ceg_cse.jpg"); /* Replace with your image URL */
+  position: relative;
+
+  /* Apply gradient from top to bottom with black */
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1),
+      rgba(256, 256, 256, 0.5),
+      rgba(256, 256, 256, 0.95)
+    ),
+    url("../assets/images/ceg_cse.jpg");
+  background-size: cover; /* Make the image fit within the container */
+  background-repeat: no-repeat; /* Prevent repeating the image */
+  background-position: 50% 65%; /* Center the image */
+}
+
+.header-content {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.departments-page {
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #b22222;
+  margin-bottom: 10px;
+}
+
+.department-filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.department-filter-dropdown {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; /* Full-width on smaller screens */
+  max-width: 300px; /* Restricts width on larger screens */
+}
+
+.departments-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.department-item {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.faculty-title {
+  font-size: 1.5rem;
+  color: #b22222;
+  margin-bottom: 10px;
+}
+
+.section {
+  margin-top: 10px;
+}
+
+.section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: rgb(201, 52, 2);
+}
+
+.section ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.section li {
+  margin-bottom: 5px;
+}
+
+/* Adjust the height for small screens (phone screens) */
+@media (max-width: 768px) {
+  .header-image {
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1),
+        rgba(256, 256, 256, 0.8)
+      ),
+      url("../assets/images/ceg_cse.jpg");
+    background-size: contain; /* Make the image fit within the container */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-position: center; /* Center the image */
+    height: 30vh;
+  }
+}

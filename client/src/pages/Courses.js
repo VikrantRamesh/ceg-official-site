@@ -154,7 +154,7 @@ const CoursesOffered = () => {
 
   return (
     <div className="courses-page">
-      <h1 className="title">Courses Offered</h1>
+      <h1 className="course-title">Courses Offered</h1>
       <div className="filter-container">
         <select
           value={selectedDepartment}

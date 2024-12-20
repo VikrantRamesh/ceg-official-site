@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Updates from "./components/Updates";
-import Statistics from "./components/Statistics";
+// import Statistics from "./components/Statistics";
+import AllDepartments from "./pages/Departments";
 import Departments from "./components/Departments";
 import VisionMission from "./components/VisionMission";
 import StudentActivity from "./components/StudentActivity";
@@ -36,6 +37,7 @@ function App() {
           <Route path="/admin/*" element={<AdminPage />} />
           <Route path="/events" element={<Events />} />
           <Route path="/courses" element={<CoursesOffered />} />
+          <Route path="/departments" element={<AllDepartments />} />
           <Route path="/admin/events_update" element={<EventsPage />} />
           <Route path="/admin/admin_profile" element={<UserProfile />} />
           <Route
