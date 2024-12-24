@@ -73,7 +73,7 @@ const DropdownMenu = ({
     {activeDropdown === tabName && items?.length > 0 && (
       <div
         className={`text-sm navbar-dropdown absolute left-1/2 transform -translate-x-1/2 ${
-          tabName === "student-needs" || tabName === "about" ? "w-max" : "w-72"
+          tabName === "people" ? "w-40" : "w-72"
         } bg-white text-black rounded shadow-lg z-50`}
       >
         {items.map((item) => (
@@ -191,6 +191,14 @@ const Navbar = () => {
     //   ],
     // },
     {
+      label: "People",
+      tabName: "people",
+      items: [
+        { label: "Dean", link: "/dean" },
+        { label: "Others", link: "/people" },
+      ],
+    },
+    {
       label: "Academics & Admissions",
       tabName: "academics",
       items: [
@@ -200,22 +208,25 @@ const Navbar = () => {
         },
         { label: "Departments", link: "/departments" },
         { label: "Courses Offered", link: "/courses" },
-        { label: "Curriculum and syllabi", link: "/academics/curriculum" },
+        { label: "Curriculum and syllabi", link: "https://cac.annauniv.edu/" },
       ],
     },
     {
       label: "Students Activities",
       tabName: "student-activity",
       items: [
-        { label: "Sport Board", link: "/student-activities/sports-board" },
-        { label: "YRC (Youth Red Cross)", link: "/student-activities/yrc" },
+        { label: "Sport Board", link: "https://www.annauniv.edu/sports/" },
+        {
+          label: "YRC (Youth Red Cross)",
+          link: "https://www.annauniv.edu/yrc/index.html",
+        },
         {
           label: "NSS (National Service Scheme)",
           link: "/student-activities/nss",
         },
         {
           label: "NCC (National Cadet Corps)",
-          link: "/student-activities/ncc",
+          link: "https://aunccarmy.vercel.app/",
         },
         {
           label: "NSO (National Sports Organisation)",
@@ -372,6 +383,12 @@ const Navbar = () => {
     {
       label: "Admin Profile",
       tabName: "admin_profile",
+      link: "/admin/admin_profile",
+      items: null,
+    },
+    {
+      label: "Logout",
+      tabName: "logout",
       link: "/admin/admin_profile",
       items: null,
     },
