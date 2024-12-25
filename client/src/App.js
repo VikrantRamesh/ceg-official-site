@@ -25,6 +25,8 @@ import CoursesOffered from "./pages/Courses";
 import EventsPage from "./pages/EventsUpdatePage";
 import UserProfile from "./pages/UserProfile";
 import PeoplePage from "./pages/People";
+import SuperAdminPage from "./pages/SuperAdminPage";
+import EditClubsPage from "./pages/AdminEditClubs";
 
 function App() {
   return (
@@ -41,7 +43,10 @@ function App() {
           <Route path="/departments" element={<AllDepartments />} />
           <Route path="/admin/events_update" element={<EventsPage />} />
           <Route path="/admin/admin_profile" element={<UserProfile />} />
+          <Route path="/super_admin/admin_profile" element={<UserProfile />} />
+          <Route path="/super_admin" element={<SuperAdminPage />} />
           <Route path="/people" element={<PeoplePage />} />
+          <Route path="/super_admin/edit_clubs" element={<EditClubsPage />} />
           <Route
             path="/"
             element={

@@ -157,6 +157,8 @@ const Navbar = () => {
     "/departments": "academics",
     "/admin/events_update": "events_update",
     "/admin/admin_profile": "admin_profile",
+    "/super_admin": "updates",
+    "/super_admin/edit_clubs": "edit_clubs",
   };
 
   // Update current tab based on URL
@@ -181,15 +183,6 @@ const Navbar = () => {
     setActiveDropdown(null);
   };
   const menuItems = [
-    // {
-    //   label: "About Us",
-    //   tabName: "about",
-    //   items: [
-    //     { label: "Profile", link: "/about/profile" },
-    //     { label: "History", link: "/about/history" },
-    //     { label: "Mission & Vision", link: "/about/mission-vision" },
-    //   ],
-    // },
     {
       label: "People",
       tabName: "people",
@@ -394,8 +387,37 @@ const Navbar = () => {
     },
   ];
 
+  const superAdminMenuItems = [
+    {
+      label: "General & Student Updates",
+      tabName: "updates",
+      link: "/super_admin",
+      items: null,
+    },
+    {
+      label: "Edit Clubs",
+      tabName: "edit_clubs",
+      link: "/super_admin/edit_clubs",
+      items: null,
+    },
+    {
+      label: "Admin Profile",
+      tabName: "uper_admin_profile",
+      link: "/super_admin/admin_profile",
+      items: null,
+    },
+    {
+      label: "Logout",
+      tabName: "logout",
+      link: "/admin/admin_profile",
+      items: null,
+    },
+  ];
+
   const isAdminPage = location.pathname.startsWith("/admin");
-  const itemsToRender = isAdminPage ? adminMenuItems : menuItems;
+  const isSuperAdminPage = location.pathname.startsWith("/super_admin");
+  let itemsToRender = isAdminPage ? adminMenuItems : menuItems;
+  itemsToRender = isSuperAdminPage ? superAdminMenuItems : itemsToRender;
 
   return (
     <>
@@ -462,7 +484,7 @@ const Navbar = () => {
 
       <nav>
         <div className="hidden lg:flex items-center p-1 shadow-md justify-evenly  bg-white border-t-2 border-gray-300 pt-2 pb-2">
-          {!isAdminPage ? (
+          {!isAdminPage && !isSuperAdminPage ? (
             <a
               href="/"
               className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold hover:border-b-4 hover:border-red-800 duration-100 ${
@@ -506,7 +528,7 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="top-full left-0 right-0 bg-slate-100 shadow-lg">
           <div className="flex flex-col space-y-2 p-4 items-baseline">
-            {!isAdminPage ? (
+            {!isAdminPage && !isSuperAdminPage ? (
               <a
                 href="#"
                 className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold ${
