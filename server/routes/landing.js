@@ -1,14 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const landingController = require('../controllers/landing');  // Import controller
+const landingController = require('../controllers/landing');
+const adminMiddleware = require('../middleware/admin')
 
-
-//returns json of the format [{id:1, category:"Student"/"General", message: "msg", link: "link", created_date:timestamp}]
+// Fetch updates
 router.get('/updates', landingController.getUpdates);
 
-
-//returns json of the format {research_centres:"",rd_grants:"",publications:"",patents_pub_gra:"",books_rfid_auto:"",student_clubs:""}
+// Fetch statistics
 router.get('/statistics', landingController.getStatistics);
 
+// Upsert update (insert or update)
+router.post('/updates', adminMiddleware, landingController.upsertUpdate);
+
+// Delete update
+router.delete('/updates/:id', adminMiddleware, landingController.deleteUpdate);
 
 module.exports = router;
