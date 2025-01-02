@@ -39,3 +39,14 @@ exports.updatePassword = async (username, password) => {
         throw err;
     }
 }
+
+exports.updateUser = async (username, password, clubid) => {
+  try{
+    const userids = await pool.query('SELECT userid FROM clubs WHERE id = ?', [clubid]);
+    const userid = userids[0].userid;
+    await pool.query('UPDATE user SET username = ?, password = ? WHERE id = ?', [userid]);
+  } catch (err){
+    console.err('Error updating credentials: ', err);
+    throw err;
+  }
+}

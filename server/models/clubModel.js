@@ -71,3 +71,32 @@ exports.updateClub = async (userId, clubData) => {
     throw err; // Throw error to be handled in the controller
   }
 };
+
+exports.deleteClub = async (clubId) => {
+  const connection = await pool.getConnection();
+  try {
+    await connection.beginTransaction();
+
+    // Fetch the user ID corresponding to the club ID
+    const [club] = await connection.query('SELECT userid FROM clubs WHERE id = ?', [clubId]);
+    if (!club[0]) {
+      throw new Error('Club not found');
+    }
+    const userId = club[0].userid;
+
+    // Delete the club
+    await connection.query('DELETE FROM clubs WHERE id = ?', [clubId]);
+
+    // Delete the corresponding user
+    await connection.query('DELETE FROM users WHERE id = ?', [userId]);
+
+    await connection.commit();
+    return { message: 'Club and corresponding user deleted successfully' };
+  } catch (err) {
+    await connection.rollback();
+    console.error('Error deleting club and user:', err);
+    throw err;
+  } finally {
+    connection.release();
+  }
+};

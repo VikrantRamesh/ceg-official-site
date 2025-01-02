@@ -8,4 +8,8 @@ const router = express.Router();
 // takes in username, password and clubname
 router.post('/create-club', adminMiddleware, adminController.createClub);
 
+router.delete('/delete-club/:clubId', adminMiddleware, clubController.deleteClub);
+
+router.post('/update-club-cred', adminMiddleware, adminController);
+
 module.exports = router;
