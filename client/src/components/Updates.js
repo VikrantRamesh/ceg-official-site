@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import au from '../assets/images/Anna_university.jpg';
 import whiteCut from '../assets/images/white_cut.png'; // Importing white_cut image
+import redCut from '../assets/images/red_cut.png';
 import '../styles/Updates.css';
 
 // Modal Component
@@ -77,11 +78,11 @@ const Updates = () => {
             <div 
                 className="absolute inset-0 bg-no-repeat hidden lg:block" // Hidden by default, visible on lg and above
                 style={{
-                    backgroundImage: `url(${whiteCut})`, 
+                    backgroundImage: `url(${redCut})`, 
                     backgroundSize: 'contain',
                     backgroundPosition: 'top right', 
                     zIndex: '0', 
-                    opacity: '0.85' // Optional: Add transparency to blend the cut image
+                    opacity: '0.45' // Optional: Add transparency to blend the cut image
                 }}
             >
             </div>
@@ -89,17 +90,17 @@ const Updates = () => {
             <div className="relative z-10 flex flex-col md:flex-col lg:flex-row items-start lg:items-center lg:justify-between h-full p-6 lg:p-12 justify-evenly">
                 {/* "Anna University" text for medium screens and above */}
                 <div className="w-full lg:w-6/12 items-center text-center md:text-center lg:text-right mb-6 lg:mb-0 md:order-first lg:order-last relative z-20">
-                    <h1 className="text-5xl lg:text-6xl text-red-800">ANNA UNIVERSITY</h1>
-                    <p className="text-xl font-bold lg:font-normal text-red-800 mt-4">
-                        With a dream and vision, beyond boundaries
+                    <h1 className="text-5xl lg:text-6xl text-white">ANNA UNIVERSITY</h1>
+                    <p className="text-xl font-bold lg:font-normal text-white mt-4">
+                        Progress Through Knowledge.
                     </p>
                 </div>
 
                 {/* Updates sections side by side */}
-                <div className="w-full lg:w-6/12 bg-white bg-opacity-80 p-6 rounded-lg shadow-lg space-y-6 md:space-y-0 md:flex md:space-x-6">
+                <div className="w-full lg:w-6/12 bg-white bg-opacity-80 p-6 rounded-lg shadow-lg space-y-6 md:space-y-0 md:flex md:space-x-6 -mt-8">
                     {/* Student Updates Section */}
                     <div className="w-full md:w-1/2 bg-white p-4 rounded-lg shadow-md overflow-hidden">
-                        <h2 className="text-lg lg:text-2xl font-bold mb-2 text-red-800 text-center">Student Updates</h2>
+                        <h2 className="text-lg lg:text-2xl mb-2 text-red-800 text-center">Student Updates</h2>
                         <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-red-700">
                             <div className="space-y-4 animate-scroll-vertical">
                                 {studentUpdates.length > 0 ? (
@@ -128,7 +129,7 @@ const Updates = () => {
 
                     {/* General Updates Section */}
                     <div className="w-full md:w-1/2 bg-white p-4 rounded-lg shadow-md overflow-hidden">
-                        <h2 className="text-lg lg:text-2xl  font-bold mb-2 text-red-800 text-center">General Updates</h2>
+                        <h2 className="text-lg lg:text-2xl mb-2 text-red-800 text-center">General Updates</h2>
                         <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-red-700">
                             <div className="space-y-4 animate-scroll-vertical">
                                 {generalUpdates.length > 0 ? (
