@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import CEGLogo from "../assets/images/CEG_logo.png";
-import AU_logo from "../assets/images/logo_au.png";
+import AU_logo from "../assets/images/AU_logo.png";
 import "../styles/NavBar.css";
 import { useNavigate } from "react-router-dom";
 import {
@@ -29,9 +29,9 @@ const DropdownMenu = ({
     onMouseLeave={() => setActiveDropdown(null)}
   >
     <button
-      className={`flex my-1 items-center mr-3 text-black font-light hover:text-red-800 transition-all hover:border-b-2 hover:border-red-800 duration-100 focus:outline-none ${
+      className={`flex my-1 items-center mr-3 text-black font-light hover:text-sky-800 transition-all hover:border-b-2 hover:border-sky-800 duration-100 focus:outline-none ${
         currentTab === tabName
-          ? "text-red-800 font-bold border-b-2 border-red-800"
+          ? "text-sky-800 font-bold border-b-2 border-sky-800"
           : ""
       }`}
       onClick={() => {
@@ -92,8 +92,8 @@ const CollapsibleMenu = ({
   return (
     <div className="w-full">
       <button
-        className={`text-black font-light mr-3 hover:text-red-800 transition-all hover:font-bold ${
-          currentTab === tabName ? "text-red-800 " : ""
+        className={`text-black font-light mr-3 hover:text-sky-800 transition-all hover:font-bold ${
+          currentTab === tabName ? "text-sky-800 " : ""
         }`}
         onClick={() => {
           if (link) {
@@ -394,12 +394,12 @@ const Navbar = () => {
 
         {/* Social Icons for large screens */}
         <div className="hidden lg:flex items-center space-x-6 mr-8">
-          <FaFacebook className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          <FaYoutube className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          <FaTwitter className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          <FaInstagram className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          <FaPhoneAlt className="text-red-800 lg:text-2xl text-3xl transition-transform transform hover:scale-125" />
-          <FaLinkedin className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <FaFacebook className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <FaYoutube className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <FaTwitter className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <FaInstagram className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <FaPhoneAlt className="text-sky-800 lg:text-2xl text-3xl transition-transform transform hover:scale-125" />
+          <FaLinkedin className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
         </div>
 
         {/* Mobile hamburger menu */}
@@ -416,9 +416,9 @@ const Navbar = () => {
           {!isAdminPage ? (
             <a
               href="/"
-              className={`text-black font-light mr-3 hover:text-red-800 transition-all hover:border-b-2 hover:border-red-800 duration-100 ${
+              className={`text-black font-light mr-3 hover:text-sky-800 transition-all hover:border-b-2 hover:border-sky-800 duration-100 ${
                 currentTab === "home"
-                  ? "text-red-800 font-light border-b-2 border-red-800"
+                  ? "text-sky-800 font-light border-b-2 border-sky-800"
                   : ""
               }`}
               onClick={() => {
@@ -460,8 +460,8 @@ const Navbar = () => {
             {!isAdminPage ? (
               <a
                 href="#"
-                className={`text-black font-light mr-3 hover:text-red-800 transition-all hover:font-bold ${
-                  currentTab === "home" ? "text-red-800 " : ""
+                className={`text-black font-light mr-3 hover:text-sky-800 transition-all hover:font-bold ${
+                  currentTab === "home" ? "text-sky-800 " : ""
                 }`}
                 onClick={() => handleTabClick("home")}
               >
@@ -485,12 +485,12 @@ const Navbar = () => {
 
             {/* Social Icons for mobile screens */}
             <div className="flex justify-center space-x-6 pt-4">
-              <FaFacebook className="text-red-800 text-2xl" />
-              <FaYoutube className="text-red-800 text-2xl" />
-              <FaTwitter className="text-red-800 text-2xl" />
-              <FaInstagram className="text-red-800 text-2xl" />
-              <FaPhoneAlt className="text-red-800 text-2xl" />
-              <FaLinkedin className="text-red-800 text-2xl" />
+              <FaFacebook className="text-sky-800 text-2xl" />
+              <FaYoutube className="text-sky-800 text-2xl" />
+              <FaTwitter className="text-sky-800 text-2xl" />
+              <FaInstagram className="text-sky-800 text-2xl" />
+              <FaPhoneAlt className="text-sky-800 text-2xl" />
+              <FaLinkedin className="text-sky-800 text-2xl" />
             </div>
           </div>
         </div>

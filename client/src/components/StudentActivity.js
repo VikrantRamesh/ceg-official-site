@@ -42,21 +42,21 @@ const activities = [
 
 const StudentActivity = () => {
   return (
-    <div className="py-16 px-4">
-      <h2 className="text-4xl font-bold mb-8 text-center text-gray-800">
+    <div className="py-14 px-4 pb-16">
+      <h2 className="text-5xl font-bold mb-9 text-center text-sky-800 font-serif">
         STUDENT ACTIVITIES
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {activities.map((activity, index) => (
           <Link key={index} to={activity.path} className="relative group block">
-            <div className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform group-hover:scale-105">
+            <div className="bg-slate-100 rounded-lg shadow-lg overflow-hidden transition-transform transform group-hover:scale-105">
               <img
                 src={activity.imageUrl}
                 alt={activity.title}
                 className="w-full h-48 object-cover transition-transform transform group-hover:scale-110"
               />
               <div className="p-4">
-                <h3 className="text-lg font-semibold">{activity.title}</h3>
+                <h3 className="text-lg font-medium">{activity.title}</h3>
               </div>
             </div>
           </Link>

@@ -20,13 +20,13 @@ const Statistics = () => {
 
   return (
     <div
-      className="relative bg-sky-200 py-2"
+      className="relative bg-sky-blue py-2"
     >
       {/* Dark overlay */}
       {/* <div className="dark-overlay absolute inset-0 bg-black opacity-40"></div> */}
 
       <div className="relative z-10 p-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-rose-700">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-black">
           <div className="bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg p-6 text-center shadow-lg rounded-lg transform hover:scale-105 transition duration-300">
             <h1 className="text-5xl font-bold">{statistics.research_centres}</h1>
             <p className="text-md font-serif  mt-3">Research Centres</p>

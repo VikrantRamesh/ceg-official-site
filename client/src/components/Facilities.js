@@ -32,7 +32,7 @@ const NextArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute right-0 top-0 h-full z-10 cursor-pointer bg-gray-700 text-white flex items-center justify-center shadow-lg hover:bg-gray-500 transition-all duration-300"
+      className="absolute right-0 top-0 h-full z-10 cursor-pointer bg-transparent text-black flex items-center justify-center hover:scale-150 transition-all duration-300"
       onClick={onClick}
       // style={{ width: "50px", right: "20px" }} // Set a fixed width and adjust padding
     >
@@ -46,7 +46,7 @@ const PrevArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute left-0 top-0 h-full z-10 cursor-pointer bg-gray-700 text-white flex items-center justify-center shadow-lg hover:bg-gray-500 transition-all duration-300"
+      className="absolute left-0 top-0 h-full z-10 cursor-pointer bg-transparent text-black flex items-center justify-center hover:scale-150 transition-all duration-300"
       onClick={onClick}
       // style={{ width: "50px", left: "20px" }} // Set a fixed width and adjust padding
     >
@@ -111,35 +111,35 @@ const Facilities = () => {
 
   return (
     <>
-      <hr className="h-1 mx-auto mb-2 border-0 rounded  bg-gray-800" />
+      {/* <hr className="h-1 mx-auto mb-2 border-0 rounded  bg-gray-800" /> */}
 
-      <h2 className="text-4xl font-bold mb-2 mt-2 text-center text-gray-800">
+      <h2 className="text-5xl font-bold mb-4 mt-2 text-center text-sky-800 font-serif">
         FACILITIES
       </h2>
-      <div className="mt-2 py-8 bg-gray-800">
+      <div className="mt-2 py-9 bg-gray-50">
         <Slider {...settings}>
           {sections.map((section, index) => (
             <div key={index} className="p-4">
               <Link to={section.path}>
-                <div className="h-56 bg-white p-6 rounded-3xl shadow-lg hover:shadow-2xl transition duration-500 ease-in-out transform hover:scale-110 text-center relative group">
+                <div className="h-56 bg-teal p-6 rounded-3xl text-beige shadow-lg hover:shadow-2xl transition duration-500 ease-in-out transform hover:scale-110 text-center relative group">
                   {/* Icon */}
                   <div
-                    className="text-6xl mb-4 mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-white text-black transform transition-transform duration-300 ease-in-out"
+                    className="text-6xl mb-4 mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-white text-white transform transition-transform duration-300 ease-in-out"
                     style={iconStyles[index]}
                   >
                     {section.icon}
                   </div>
 
                   {/* Animated Dots */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  {/* <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="animate-pulse absolute top-0 left-1/2 h-2 w-2 bg-white rounded-full"></div>
                     <div className="animate-pulse absolute right-1/2 bottom-0 h-2 w-2 bg-white rounded-full"></div>
                     <div className="animate-pulse absolute top-1/2 right-0 h-2 w-2 bg-white rounded-full"></div>
                     <div className="animate-pulse absolute bottom-1/2 left-0 h-2 w-2 bg-white rounded-full"></div>
-                  </div>
+                  </div> */}
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-orange-600">
+                  <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-sky-950">
                     {section.title}
                   </h3>
                 </div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import au from '../assets/images/Anna_university.jpg';
 import whiteCut from '../assets/images/white_cut.png'; // Importing white_cut image
 import redCut from '../assets/images/red_cut.png';
+import blueCut from '../assets/images/blue_cut.png';
 import '../styles/Updates.css';
 
 // Modal Component
@@ -78,7 +79,7 @@ const Updates = () => {
             <div 
                 className="absolute inset-0 bg-no-repeat hidden lg:block" // Hidden by default, visible on lg and above
                 style={{
-                    backgroundImage: `url(${redCut})`, 
+                    backgroundImage: `url(${blueCut})`, 
                     backgroundSize: 'contain',
                     backgroundPosition: 'top right', 
                     zIndex: '0', 
@@ -91,7 +92,7 @@ const Updates = () => {
                 {/* "Anna University" text for medium screens and above */}
                 <div className="w-full lg:w-6/12 items-center text-center md:text-center lg:text-right mb-6 lg:mb-0 md:order-first lg:order-last relative z-20">
                     <h1 className="text-5xl lg:text-6xl text-white">ANNA UNIVERSITY</h1>
-                    <p className="text-xl font-bold lg:font-normal text-white mt-4">
+                    <p className="text-xl font-bold lg:font-normal text-sky-200 mt-4">
                         Progress Through Knowledge.
                     </p>
                 </div>
@@ -100,8 +101,8 @@ const Updates = () => {
                 <div className="w-full lg:w-6/12 bg-white bg-opacity-80 p-6 rounded-lg shadow-lg space-y-6 md:space-y-0 md:flex md:space-x-6 -mt-8">
                     {/* Student Updates Section */}
                     <div className="w-full md:w-1/2 bg-white p-4 rounded-lg shadow-md overflow-hidden">
-                        <h2 className="text-lg lg:text-2xl mb-2 text-red-800 text-center">Student Updates</h2>
-                        <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-red-700">
+                        <h2 className="text-lg lg:text-2xl mb-2 text-center">Student Updates</h2>
+                        <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-sky-700">
                             <div className="space-y-4 animate-scroll-vertical">
                                 {studentUpdates.length > 0 ? (
                                     studentUpdates.map(update => (
@@ -121,7 +122,7 @@ const Updates = () => {
                          {/* "View All" Button */}
                          <button 
                             onClick={() => setShowStudentModal(true)} 
-                            className="mt-4 bg-red-700 text-white py-2 px-4 rounded-lg w-full text-center"
+                            className="mt-4 bg-sky-700 text-white font-sans py-2 px-4 rounded-xl w-full text-center hover:bg-sky-500 transition"
                         >
                             View All
                         </button>
@@ -129,8 +130,8 @@ const Updates = () => {
 
                     {/* General Updates Section */}
                     <div className="w-full md:w-1/2 bg-white p-4 rounded-lg shadow-md overflow-hidden">
-                        <h2 className="text-lg lg:text-2xl mb-2 text-red-800 text-center">General Updates</h2>
-                        <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-red-700">
+                        <h2 className="text-lg lg:text-2xl mb-2 text-center">General Updates</h2>
+                        <div className="pt-28 h-56 font-medium overflow-y-hidden relative border-t-2 border-sky-700">
                             <div className="space-y-4 animate-scroll-vertical">
                                 {generalUpdates.length > 0 ? (
                                     generalUpdates.map(update => (
@@ -150,7 +151,7 @@ const Updates = () => {
                          {/* "View All" Button */}
                          <button 
                             onClick={() => setShowStudentModal(true)} 
-                            className="mt-4 bg-red-700 text-white py-2 px-4 rounded-lg w-full text-center"
+                            className="mt-4 bg-sky-700 text-white font-sans py-2 px-4 rounded-xl w-full text-center hover:bg-sky-500 transition"
                         >
                             View All
                         </button>   

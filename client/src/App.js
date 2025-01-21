@@ -14,6 +14,7 @@ import StudentActivity from "./components/StudentActivity";
 import DeanProfile from "./components/DeanProfile";
 import Facilities from "./components/Facilities"; // Import Facilities
 import au from "./assets/images/hexagon.jpg";
+import backg from "./assets/images/vision-mission-depts-bg.png";
 import Club from "./admin/pages/Club";
 import ClubPage from "./pages/ClubPage";
 import ClubHomePage from "./pages/ClubHomePage";
@@ -43,11 +44,11 @@ function App() {
             element={
               <>
                 <Updates />
-                <Statistics />
+                {/* <Statistics /> */}
                 <DeanProfile />
                 <div
                   style={{
-                    backgroundImage: `url(${au})`,
+                    backgroundImage: `url(${backg})`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundBlendMode: "difference",
