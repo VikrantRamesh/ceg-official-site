@@ -5,6 +5,8 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
+
+import UpdateSoon from "./pages/UpdateSoon";
 import NavBar from "./components/NavBar";
 import Updates from "./components/Updates";
 // import Statistics from "./components/Statistics";
@@ -14,7 +16,9 @@ import VisionMission from "./components/VisionMission";
 import StudentActivity from "./components/StudentActivity";
 import DeanProfile from "./components/DeanProfile";
 import Facilities from "./components/Facilities"; // Import Facilities
-import au from "./assets/images/hexagon.png";
+
+// import au from "./assets/images/hexagon.jpg";
+import backg from "./assets/images/vision-mission-depts-bg.png";
 import Club from "./admin/pages/Club";
 import ClubPage from "./pages/ClubPage";
 import ClubHomePage from "./pages/ClubHomePage";
@@ -45,20 +49,19 @@ function App() {
           <Route path="/admin/admin_profile" element={<UserProfile />} />
           <Route path="/super_admin/admin_profile" element={<UserProfile />} />
           <Route path="/super_admin" element={<SuperAdminPage />} />
-          <Route path="/people" element={<PeoplePage />} />
           <Route path="/super_admin/edit_clubs" element={<EditClubsPage />} />
+          <Route path="/people" element={<PeoplePage />} />
+          <Route path="/updatesoon" element={<UpdateSoon />} />
           <Route
             path="/"
             element={
               <>
                 <Updates />
                 {/* <Statistics /> */}
-                <VisionMission />
                 <DeanProfile />
                 <div
                   style={{
-                    backgroundSize: "auto",
-                    backgroundImage: `url(${au})`,
+                    backgroundImage: `url(${backg})`,
                     backgroundRepeat: "no-repeat",
                     // backgroundSize: "cover",
                     backgroundBlendMode: "difference",

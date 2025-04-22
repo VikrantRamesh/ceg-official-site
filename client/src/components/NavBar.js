@@ -5,26 +5,12 @@ import "../styles/NavBar.css";
 import { useNavigate } from "react-router-dom";
 import {
   FaFacebook,
+  FaYoutube,
   FaInstagram,
-  Fatwitter,
+  FaTwitter,
   FaLinkedin,
   FaPhoneAlt,
 } from "react-icons/fa";
-
-const XIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 1200 1227"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
-      fill="#991b1b"
-    />
-  </svg>
-);
 
 const DropdownMenu = ({
   label,
@@ -42,9 +28,9 @@ const DropdownMenu = ({
     onMouseLeave={() => setActiveDropdown(null)}
   >
     <button
-      className={`flex items-center mr-3 text-black font-bold hover:text-red-800 transition-all hover:font-bold hover:border-b-4 hover:border-red-800 duration-100 focus:outline-none ${
+      className={`flex my-1 items-center mr-3 text-black font-light hover:text-sky-800 transition-all hover:border-b-2 hover:border-sky-800 duration-100 focus:outline-none ${
         currentTab === tabName
-          ? "text-red-800 font-bold border-b-4 border-red-800"
+          ? "text-sky-800 font-bold border-b-2 border-sky-800"
           : ""
       }`}
       onClick={() => {
@@ -73,7 +59,7 @@ const DropdownMenu = ({
     {activeDropdown === tabName && items?.length > 0 && (
       <div
         className={`text-sm navbar-dropdown absolute left-1/2 transform -translate-x-1/2 ${
-          tabName === "people" ? "w-40" : "w-72"
+          tabName === "student-needs" || tabName === "about" ? "w-max" : "w-72"
         } bg-white text-black rounded shadow-lg z-50`}
       >
         {items.map((item) => (
@@ -105,8 +91,8 @@ const CollapsibleMenu = ({
   return (
     <div className="w-full">
       <button
-        className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold ${
-          currentTab === tabName ? "text-red-800 " : ""
+        className={`text-black font-light mr-3 hover:text-sky-800 transition-all hover:font-bold ${
+          currentTab === tabName ? "text-sky-800 " : ""
         }`}
         onClick={() => {
           if (link) {
@@ -145,7 +131,6 @@ const Navbar = () => {
   const location = useLocation();
   const [currentTab, setCurrentTab] = useState("home");
 
-  // Define URL-to-tab mapping
   const urlToTabMap = {
     "/": "home",
     "/club": "club",
@@ -154,10 +139,11 @@ const Navbar = () => {
     "/admin": "club_details",
     "/events": "student-activity",
     "/courses": "academics",
-    "/departments": "academics",
     "/admin/events_update": "events_update",
     "/admin/admin_profile": "admin_profile",
-    "/super_admin": "updates",
+    // Super Admin URLs
+    "/super_admin": "super_admin_dashboard",
+    "/super_admin/admin_profile": "admin_profile",
     "/super_admin/edit_clubs": "edit_clubs",
   };
 
@@ -183,14 +169,15 @@ const Navbar = () => {
     setActiveDropdown(null);
   };
   const menuItems = [
-    {
-      label: "People",
-      tabName: "people",
-      items: [
-        { label: "Dean", link: "/dean" },
-        { label: "Others", link: "/people" },
-      ],
-    },
+    // {
+    //   label: "About Us",
+    //   tabName: "about",
+    //   items: [
+    //     { label: "Profile", link: "/profile" },
+    //     { label: "History", link: "/history" },
+    //     { label: "Mission & Vision", link: "/mission-vision" },
+    //   ],
+    // },
     {
       label: "Academics & Admissions",
       tabName: "academics",
@@ -201,21 +188,18 @@ const Navbar = () => {
         },
         { label: "Departments", link: "/departments" },
         { label: "Courses Offered", link: "/courses" },
-        { label: "Curriculum and syllabi", link: "https://cac.annauniv.edu/" },
+        { label: "Curriculum and syllabi", link: "/curriculum" },
       ],
     },
     {
       label: "Students Activities",
       tabName: "student-activity",
       items: [
-        { label: "Sport Board", link: "https://www.annauniv.edu/sports/" },
-        {
-          label: "YRC (Youth Red Cross)",
-          link: "https://www.annauniv.edu/yrc/index.html",
-        },
+        { label: "Sport Board", link: "https://ceg.annauniv.edu/sports.html" },
+        { label: "YRC (Youth Red Cross)", link: "https://www.annauniv.edu/yrc/contacts.html" },
         {
           label: "NSS (National Service Scheme)",
-          link: "/student-activities/nss",
+          link: "https://ceg.annauniv.edu/NSS.html",
         },
         {
           label: "NCC (National Cadet Corps)",
@@ -223,11 +207,11 @@ const Navbar = () => {
         },
         {
           label: "NSO (National Sports Organisation)",
-          link: "/student-activities/nso",
+          link: "https://ceg.annauniv.edu/sports.html",
         },
         {
           label: "Students Quality Club",
-          link: "/student-activities/quality-club",
+          link: "https://www.facebook.com/studentsqualitycouncil/",
         },
         { label: "Events and Festivals", link: "/events" },
         {
@@ -236,7 +220,7 @@ const Navbar = () => {
         },
         {
           label: "Green Brigade (Environmental Sustainability)",
-          link: "/student-activities/green-brigade",
+          link: "https://reachgreenbrigade.wixsite.com/website",
         },
       ],
     },
@@ -246,46 +230,46 @@ const Navbar = () => {
       items: [
         {
           label: "ACOE (Additional Controller of Examinations)",
-          link: "/student-needs/aco",
+          link: "https://acoe.annauniv.edu/",
         },
         {
           label: "Centre for e-Governance",
-          link: "/student-needs/egovernance",
+          link: "https://www.auegov.ac.in/",
         },
         {
           label: "Centre for International Relations",
-          link: "/student-needs/international-relations",
+          link: "https://www.annauniv.edu/cir/",
         },
-        { label: "Alumni", link: "/student-needs/alumni" },
-        { label: "Library", link: "/student-needs/library" },
-        { label: "Placement Cell", link: "/student-needs/placement" },
+        { label: "Alumni", link: "https://www.aaceg.org/" },
+        { label: "Library", link: "https://library.annauniv.edu/" },
+        { label: "Placement Cell", link: "https://cuic.annauniv.edu/" },
         {
           label: "Centre for Student Affairs",
-          link: "/student-needs/student-affairs",
+          link: "https://www.annauniv.edu/dsa/",
         },
         {
           label: "CPDE (Centre for Professional Development Education)",
-          link: "/student-needs/cpde",
+          link: "https://www.annauniv.edu/cpde/",
         },
-        { label: "Health Centre", link: "/student-needs/health-centre" },
+        { label: "Health Centre", link: "https://www.annauniv.edu/HealthCentre/services.html" },
         {
           label: "POSH (Prevention of Sexual Harassment Cell)",
-          link: "/student-needs/posh",
+          link: "https://www.annauniv.edu/POSH/index.php",
         },
-        { label: "SC/ST Cell", link: "/student-needs/scst-cell" },
-        { label: "Logistics Centre", link: "/student-needs/logistics" },
+        { label: "SC/ST Cell", link: "https://www.annauniv.edu/scstcell/index.html" },
+        { label: "Logistics Centre", link: "https://annauniv.edu/logistics/index.php" },
         {
           label: "CIPR (Centre for Intellectual Property Rights)",
-          link: "/student-needs/cipr",
+          link: "https://www.annauniv.edu/ipr/",
         },
         {
           label: "Students Grievance Redressal",
-          link: "/student-needs/grievance-redressal",
+          link: "https://www.annauniv.edu/auccgrcell/",
         },
-        { label: "Anti Ragging", link: "/student-needs/anti-ragging" },
+        { label: "Anti Ragging", link: "https://ceg.annauniv.edu/Anti%20Ragging.html" },
         {
           label: "Professional Ethics",
-          link: "/student-needs/professional-ethics",
+          link: "https://ceg.annauniv.edu/files/download_appforms/Professional%20Ethics.pdf",
         },
       ],
     },
@@ -296,11 +280,11 @@ const Navbar = () => {
         { label: "Doing Research in CEG", link: "/research/doing-research" },
         {
           label: "Centre for Research in University",
-          link: "/research/centre-for-research",
+          link: "https://cfr.annauniv.edu/research/academics/index.php",
         },
         {
           label: "Dedicated Research Centers",
-          link: "/research/research-centers",
+          link: "https://cfr.annauniv.edu/research/academics/index.php",
         },
       ],
     },
@@ -308,13 +292,13 @@ const Navbar = () => {
       label: "Download Forms",
       tabName: "forms",
       items: [
-        { label: "Discontinue", link: "/forms/discontinue" },
-        { label: "No Dues", link: "/forms/no-dues" },
-        { label: "TC Application", link: "/forms/tc-application" },
-        { label: "Anti-Ragging Application", link: "/forms/anti-ragging" },
-        { label: "On Duty Application Form", link: "/forms/on-duty" },
-        { label: "Student Internship Application", link: "/forms/internship" },
-        { label: "Condemnation Format", link: "/forms/condemnation" },
+        { label: "Discontinue", link: "/updatesoon" },
+        { label: "No Dues", link: "/updatesoon" },
+        { label: "TC Application", link: "/updatesoon" },
+        { label: "Anti-Ragging Application", link: "/updatesoon" },
+        { label: "On Duty Application Form", link: "/updatesoon" },
+        { label: "Student Internship Application", link: "/updatesoon" },
+        { label: "Condemnation Format", link: "/updatesoon" },
         {
           label: "Monthly Progress Report for GATE Scholarship",
           link: "/forms/gate-progress",
@@ -333,30 +317,30 @@ const Navbar = () => {
           label: "Central Sector (UG/PG)",
           link: "/scholarship/central-sector",
         },
-        { label: "Private/Alumni (UG)", link: "/scholarship/private-alumni" },
-        { label: "Endowments (UG)", link: "/scholarship/endowments" },
-        { label: "BC/MBC Regular (UG)", link: "/scholarship/bcmvc-ug" },
-        { label: "BC/MBC Regular (PG)", link: "/scholarship/bcmvc-pg" },
-        { label: "SC/ST Regular (UG)", link: "/scholarship/scst-ug" },
-        { label: "SC/ST Regular (PG)", link: "/scholarship/scst-pg" },
+        { label: "Private/Alumni (UG)", link: "/updatesoon" },
+        { label: "Endowments (UG)", link: "/updatesoon" },
+        { label: "BC/MBC Regular (UG)", link: "/updatesoon" },
+        { label: "BC/MBC Regular (PG)", link: "/updatesoon" },
+        { label: "SC/ST Regular (UG)", link: "/updatesoon" },
+        { label: "SC/ST Regular (PG)", link: "/updatesoon" },
         {
           label: "SC/ST (PMSS) Self-Support (UG)",
-          link: "/scholarship/scst-pmss-ug",
+          link: "/updatesoon",
         },
         {
           label: "SC/ST (PMSS) Self-Support (PG)",
-          link: "/scholarship/scst-pmss-pg",
+          link: "/updatesoon",
         },
         {
           label: "SC/ST Special Loan for Hostel Fee (UG/PG)",
-          link: "/scholarship/scst-loan-hostel",
+          link: "/updatesoon",
         },
       ],
     },
     {
       label: "CEG Hostel",
       tabName: "hostel",
-      link: "/hostel",
+      link: "https://ceghostel.in/",
       items: null,
     },
   ];
@@ -379,18 +363,11 @@ const Navbar = () => {
       link: "/admin/admin_profile",
       items: null,
     },
-    {
-      label: "Logout",
-      tabName: "logout",
-      link: "/admin/admin_profile",
-      items: null,
-    },
   ];
-
   const superAdminMenuItems = [
     {
       label: "General & Student Updates",
-      tabName: "updates",
+      tabName: "super_admin_dashboard",
       link: "/super_admin",
       items: null,
     },
@@ -401,23 +378,23 @@ const Navbar = () => {
       items: null,
     },
     {
-      label: "Admin Profile",
-      tabName: "uper_admin_profile",
+      label: "Profile",
+      tabName: "admin_profile",
       link: "/super_admin/admin_profile",
-      items: null,
-    },
-    {
-      label: "Logout",
-      tabName: "logout",
-      link: "/admin/admin_profile",
       items: null,
     },
   ];
 
+  // Determine if the current page is an admin or super admin page
   const isAdminPage = location.pathname.startsWith("/admin");
   const isSuperAdminPage = location.pathname.startsWith("/super_admin");
-  let itemsToRender = isAdminPage ? adminMenuItems : menuItems;
-  itemsToRender = isSuperAdminPage ? superAdminMenuItems : itemsToRender;
+
+  // Choose the correct menu items based on the page type
+  const itemsToRender = isSuperAdminPage
+    ? superAdminMenuItems
+    : isAdminPage
+    ? adminMenuItems
+    : menuItems;
 
   return (
     <>
@@ -426,14 +403,14 @@ const Navbar = () => {
           <img
             src={CEGLogo}
             alt="CEG Logo"
-            className="h-12 mr-6 ml-6 mt-3 mb-3"
+            className="h-12 mr-5 ml-6 mt-3 mb-3"
             style={{ height: "7vh" }}
           />
           <div className="flex flex-col">
-            <span className="lg:text-3xl md:text-2xl text-xl font-bold tracking-wider mb-1">
+            <span className="lg:text-3xl md:text-2xl text-xl font-bold font-serif tracking-wider mb-1">
               CEG CAMPUS
             </span>
-            <span className="lg:text-md text-sm text-center tracking-normal">
+            <span className="lg:text-md text-sm text-center font-sans tracking-normal">
               Anna University, Chennai
             </span>
           </div>
@@ -441,37 +418,12 @@ const Navbar = () => {
 
         {/* Social Icons for large screens */}
         <div className="hidden lg:flex items-center space-x-6 mr-8">
-          <a
-            href="https://www.facebook.com/CegChennai/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaFacebook className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          </a>
-          <a
-            href="https://www.instagram.com/ceg_au/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaInstagram className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          </a>
-          <a
-            href="https://x.com/cegguindy"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <XIcon className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          </a>
-          <a
-            href="https://www.linkedin.com/school/college-of-engineering-guindy/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaLinkedin className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          </a>
-          <a href="tel:+91 044 2235 8491">
-            <FaPhoneAlt className="text-red-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
-          </a>
+          <FaFacebook className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <FaYoutube className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <FaTwitter className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <FaInstagram className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
+          <FaPhoneAlt className="text-sky-800 lg:text-2xl text-3xl transition-transform transform hover:scale-125" />
+          <FaLinkedin className="text-sky-800 lg:text-3xl text-3xl transition-transform transform hover:scale-125" />
         </div>
 
         {/* Mobile hamburger menu */}
@@ -482,14 +434,15 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/*  border-t-2 border-gray-300 - removed from <div> on line 415 */}
       <nav>
-        <div className="hidden lg:flex items-center p-1 shadow-md justify-evenly  bg-white border-t-2 border-gray-300 pt-2 pb-2">
+        <div className="hidden lg:flex font-serif items-center p-1 shadow-md justify-evenly bg-white pt-1 pb-2">
           {!isAdminPage && !isSuperAdminPage ? (
             <a
               href="/"
-              className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold hover:border-b-4 hover:border-red-800 duration-100 ${
+              className={`text-black font-light mr-3 hover:text-sky-800 transition-all hover:border-b-2 hover:border-sky-800 duration-100 ${
                 currentTab === "home"
-                  ? "text-red-800 font-bold border-b-4 border-red-800"
+                  ? "text-sky-800 font-light border-b-2 border-sky-800"
                   : ""
               }`}
               onClick={() => {
@@ -528,11 +481,11 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="top-full left-0 right-0 bg-slate-100 shadow-lg">
           <div className="flex flex-col space-y-2 p-4 items-baseline">
-            {!isAdminPage && !isSuperAdminPage ? (
+            {!isAdminPage ? (
               <a
-                href="#"
-                className={`text-black font-bold mr-3 hover:text-red-800 transition-all hover:font-bold ${
-                  currentTab === "home" ? "text-red-800 " : ""
+                href="/"
+                className={`text-black font-light mr-3 hover:text-sky-800 transition-all hover:font-bold ${
+                  currentTab === "home" ? "text-sky-800 " : ""
                 }`}
                 onClick={() => handleTabClick("home")}
               >
@@ -556,37 +509,12 @@ const Navbar = () => {
 
             {/* Social Icons for mobile screens */}
             <div className="flex justify-center space-x-6 pt-4">
-              <a
-                href="https://www.facebook.com/CegChennai/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebook className="text-red-800 text-2xl" />
-              </a>
-              <a
-                href="https://www.instagram.com/ceg_au/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram className="text-red-800 text-2xl" />
-              </a>
-              <a
-                href="https://x.com/cegguindy"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <XIcon className="text-red-800 text-2xl" />
-              </a>
-              <a
-                href="https://www.linkedin.com/school/college-of-engineering-guindy/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedin className="text-red-800 text-2xl" />
-              </a>
-              <a href="tel:+1234567890">
-                <FaPhoneAlt className="text-red-800 text-2xl" />
-              </a>
+              <FaFacebook className="text-sky-800 text-2xl" />
+              <FaYoutube className="text-sky-800 text-2xl" />
+              <FaTwitter className="text-sky-800 text-2xl" />
+              <FaInstagram className="text-sky-800 text-2xl" />
+              <FaPhoneAlt className="text-sky-800 text-2xl" />
+              <FaLinkedin className="text-sky-800 text-2xl" />
             </div>
           </div>
         </div>

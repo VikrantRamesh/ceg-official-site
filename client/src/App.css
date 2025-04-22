@@ -13,6 +13,16 @@
   }
 }
 
+/* Hide scrollbar for a specific container */
+.Container {
+  overflow-y: scroll; /* Retain scrolling */
+  scrollbar-width: none; /* Firefox */
+}
+
+.Container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
 .App-header {
   min-height: 100vh;
   display: flex;

@@ -2,9 +2,9 @@ import React from "react";
 import "../styles/Events.css";
 import technofes from "../assets/images/Techofes.jpg";
 import agni from "../assets/images/agni.jpg";
-import kurukshetra from "../assets/images/kurukshetra.JPG";
+import kurukshetra from "../assets/images/agni.jpg";
 import Sangharsh from "../assets/images/sangarsh.jpg";
-import vyuhaa from "../assets/images/vyuhaa.JPG";
+import vyuhaa from "../assets/images/vyuhaa.png";
 
 const Events = () => {
   const events = [
@@ -16,14 +16,14 @@ const Events = () => {
       date: "NOV 8-10, 2024",
       image: agni,
     },
-    {
-      id: 2,
-      title: "Kurukshetra (K!)",
-      description:
-        "Kurukshetra, the premier inter-college techno-management festival, attracts thousands of students with challenging quizzes, workshops, and mind-bending games.",
-      date: "January 20, 2024",
-      image: kurukshetra,
-    },
+    // {
+    //   id: 2,
+    //   title: "Kurukshetra (K!)",
+    //   description:
+    //     "Kurukshetra, the premier inter-college techno-management festival, attracts thousands of students with challenging quizzes, workshops, and mind-bending games.",
+    //   date: "January 20, 2024",
+    //   image: kurukshetra,
+    // },
     {
       id: 3,
       title: "Techofes",

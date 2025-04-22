@@ -108,14 +108,14 @@ const departments = [
 
 const Departments = () => {
   return (
-    <div className="p-6 pr-12 pl-12 ">
-      <h2 className="lg:text-4xl text-2xl font-bold mb-4 text-center" style={{color: '#2b2a4c'}}>DEPARTMENTS</h2>
+    <div className="p-6 pr-12 pl-12 pb-14">
+      <h2 className="lg:text-5xl text-2xl font-bold mb-7 text-center text-sky-800 font-serif">DEPARTMENTS</h2>
       <div className="grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 gap-4">
         {departments.map((department) => (
           <a
             key={department.name}
             href={department.url}
-            className="block p-4 bg-gray-100 rounded shadow hover:bg-blue-50 hover:shadow-lg transition transform hover:scale-105 duration-200"
+            className="block p-4 bg-gray-50 rounded shadow hover:bg-blue-50 hover:shadow-lg transition transform hover:scale-105 duration-200"
           >
             <div className="flex justify-between items-center">
               <span className="font-semibold">{department.name}</span>
